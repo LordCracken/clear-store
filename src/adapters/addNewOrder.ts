@@ -1,5 +1,5 @@
 import AppData from './appData';
-import Order from '../entities/order';
+import Order from '../domain/entities/order';
 
 const addNewOrder = (path: AppData, newOrder: Order) => {
   path.orders.concat(newOrder);
