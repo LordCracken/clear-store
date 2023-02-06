@@ -39,6 +39,10 @@ class Cart {
 
     return updatedCart;
   }
+
+  empty() {
+    this.products = [];
+  }
 }
 
 export default Cart;
