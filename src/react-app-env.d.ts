@@ -6,5 +6,6 @@ declare module '*.jpg' {
 
 type UniqueID = string;
 type Email = string;
+type Password = string;
 type ImageURL = string;
 type DateTime = string;
