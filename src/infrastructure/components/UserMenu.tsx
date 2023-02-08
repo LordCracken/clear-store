@@ -1,9 +1,14 @@
 import { MouseEvent, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, Box, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
+import { RootState, useAppDispatch } from '../store';
+import { signOutUser } from '../store/user-actions';
 
 const UserMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const user = useSelector((state: RootState) => state.user.user);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const settings = [
@@ -17,6 +22,7 @@ const UserMenu = () => {
       label: 'Выйти',
       action: () => {
         navigate('./');
+        dispatch(signOutUser(user.email));
       },
     },
   ];
