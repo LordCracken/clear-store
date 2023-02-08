@@ -13,7 +13,12 @@ const UserMenu = () => {
         navigate('/profile');
       },
     },
-    { label: 'Выйти', action: () => null },
+    {
+      label: 'Выйти',
+      action: () => {
+        navigate('./');
+      },
+    },
   ];
 
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
