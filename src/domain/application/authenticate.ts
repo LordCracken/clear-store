@@ -12,8 +12,8 @@ const authenticate: IAuthFunc = (email, password, users) => {
 
   if (desiredUser && desiredUser.password === password) {
     desiredUser.signIn();
-    const {email, firstName, lastName} = desiredUser;
-    return {email, firstName, lastName};
+    const { email, firstName, lastName } = desiredUser;
+    return { email, firstName, lastName };
   }
 };
 

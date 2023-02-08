@@ -12,7 +12,7 @@ const initialState = {
   user: {
     email: '',
     firstName: '',
-    lastName: ''
+    lastName: '',
   },
 };
 
@@ -25,7 +25,7 @@ const userSlice = createSlice({
         state.user = {
           email: action.payload.email,
           firstName: action.payload.firstName,
-          lastName: action.payload.lastName
+          lastName: action.payload.lastName,
         };
       }
     },
