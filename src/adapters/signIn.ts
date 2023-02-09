@@ -1,9 +1,9 @@
 import AppData from './appData';
-import authenticate from '../domain/application/authenticate';
+import identification from '../domain/application/identification';
 
 const signIn = (path: AppData, email: Email, password: Password) => {
   const users = path.users;
-  return authenticate(email, password, users);
+  return identification(email, password, users);
 };
 
 export default signIn;

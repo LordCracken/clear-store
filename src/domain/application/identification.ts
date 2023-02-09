@@ -7,7 +7,7 @@ interface IUserObj {
 }
 type IAuthFunc = (email: Email, password: Password, users: User[]) => IUserObj | undefined;
 
-const authenticate: IAuthFunc = (email, password, users) => {
+const identification: IAuthFunc = (email, password, users) => {
   const desiredUser = users.find(user => user.email === email);
 
   if (desiredUser && desiredUser.password === password) {
@@ -17,4 +17,4 @@ const authenticate: IAuthFunc = (email, password, users) => {
   }
 };
 
-export default authenticate;
+export default identification;
