@@ -18,7 +18,11 @@ export const signInUser = (email: Email, password: Password) => async (dispatch:
 };
 
 export const signOutUser = (email: Email) => async (dispatch: Dispatch) => {
-  await signOut(data, email);
+  const isExited = await new Promise(resolve => {
+    resolve(signOut(data, email));
+  });
 
-  dispatch(userActions.signOut());
+  if (isExited) {
+    dispatch(userActions.signOut());
+  }
 };
