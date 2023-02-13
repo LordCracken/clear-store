@@ -24,18 +24,18 @@ const AuthPage = () => {
   }, [user.email]);
 
   const signInHandler = () => {
-    const emailValidation = email.length === 0;
-    const passwordValidation = password.length < 7;
+    const emailError = email.length === 0;
+    const passwordError = password.length < 7;
 
-    if (emailValidation) {
+    if (emailError) {
       setEmailError('Введите Email');
     }
 
-    if (passwordValidation) {
+    if (passwordError) {
       setPasswordError('Пароль меньше 7 символов');
     }
 
-    if (emailValidation || passwordValidation) {
+    if (emailError || passwordError) {
       return;
     }
 
