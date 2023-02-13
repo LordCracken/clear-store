@@ -18,6 +18,7 @@ const ProductsPage = () => {
       {products.map(item => (
         <ProductItem
           key={item.id}
+          id={item.id}
           name={item.name}
           author={item.author}
           image={item.image}
