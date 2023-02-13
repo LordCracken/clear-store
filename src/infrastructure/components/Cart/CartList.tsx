@@ -3,12 +3,21 @@ import CartItem from './CartItem';
 import { RootState, useAppDispatch } from '../../store';
 import { useSelector } from 'react-redux';
 import { cartActions } from '../../store/cartSlice';
+import { useNavigate } from 'react-router-dom';
 
 const CartList = () => {
   const dispatch = useAppDispatch();
   const { products, totalPrice } = useSelector((state: RootState) => state.cart);
+  const { email } = useSelector((state: RootState) => state.user.user);
+  const navigate = useNavigate();
 
   const createOrderHandler = () => {
+    if (!email) {
+      navigate('/auth');
+      dispatch(cartActions.closeCart());
+      return;
+    }
+
     dispatch(cartActions.empty());
   };
 
