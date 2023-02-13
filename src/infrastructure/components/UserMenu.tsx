@@ -1,7 +1,10 @@
 import { MouseEvent, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Avatar, Box, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
+
+import { Box, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
+import { AccountCircle } from '@mui/icons-material';
+
 import { RootState, useAppDispatch } from '../store';
 import { signOutUser } from '../store/user-actions';
 
@@ -39,7 +42,7 @@ const UserMenu = () => {
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
+          <AccountCircle sx={{ color: '#fff' }} />
         </IconButton>
       </Tooltip>
       <Menu

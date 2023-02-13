@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Button, Typography } from '@mui/material';
-import { AccountCircle } from '@mui/icons-material';
+import { IconButton } from '@mui/material';
+import { Login } from '@mui/icons-material';
 
 const SignInButton = () => {
   const navigate = useNavigate();
@@ -11,14 +11,9 @@ const SignInButton = () => {
   };
 
   return (
-    <Button
-      variant="outlined"
-      startIcon={<AccountCircle />}
-      sx={{ color: '#fff' }}
-      onClick={clickHandler}
-    >
-      <Typography sx={{ display: { xs: 'none', sm: 'inline' } }}>Войти</Typography>
-    </Button>
+    <IconButton color="inherit" onClick={clickHandler}>
+      <Login />
+    </IconButton>
   );
 };
 
