@@ -10,7 +10,9 @@ const ProductsPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchProductsData());
+    if (!products.length) {
+      dispatch(fetchProductsData());
+    }
   }, []);
 
   return (
