@@ -1,18 +1,32 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { Alert, AlertTitle, Box, Button, Grid, Snackbar, TextField } from '@mui/material';
 import { RootState, useAppDispatch } from '../store';
 import { signInUser } from '../store/user-actions';
+import useInput from '../hooks/useInput';
 
 const AuthPage = () => {
-  const [email, setEmail] = useState<Email>('');
-  const [password, setPassword] = useState<Password>('');
-  const [emailError, setEmailError] = useState<string>('');
-  const [passwordError, setPasswordError] = useState<string>('');
   const [snackIsOpen, setSnackIsOpen] = useState(false);
   const navigate = useNavigate();
+
+  const emailRule = (value: Email) => value.length !== 0;
+  const passwordRule = (value: Password) => value.length >= 7;
+
+  const {
+    value: email,
+    error: emailError,
+    setIsTouchedHandler: setEmailIsTouched,
+    valueChangeHandler: emailChangeHandler,
+  } = useInput(emailRule, 'Введите Email');
+
+  const {
+    value: password,
+    error: passwordError,
+    setIsTouchedHandler: setPasswordIsTouched,
+    valueChangeHandler: passwordChangeHandler,
+  } = useInput(passwordRule, 'Пароль меньше 7 символов');
 
   const dispatch = useAppDispatch();
   const { user, error } = useSelector((state: RootState) => state.user);
@@ -24,16 +38,8 @@ const AuthPage = () => {
   }, [user.email]);
 
   const signInHandler = () => {
-    const emailError = email.length === 0;
-    const passwordError = password.length < 7;
-
-    if (emailError) {
-      setEmailError('Введите Email');
-    }
-
-    if (passwordError) {
-      setPasswordError('Пароль меньше 7 символов');
-    }
+    setEmailIsTouched();
+    setPasswordIsTouched();
 
     if (emailError || passwordError) {
       return;
@@ -44,17 +50,6 @@ const AuthPage = () => {
     if (error) {
       setSnackIsOpen(true);
     }
-
-    setEmailError('');
-    setPasswordError('');
-  };
-
-  const emailChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
-
-  const passwordChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
   };
 
   const closeSnackHandler = () => {
@@ -89,7 +84,7 @@ const AuthPage = () => {
               value={email}
               helperText={emailError}
               onChange={emailChangeHandler}
-              onBlur={() => email && setEmailError('')}
+              onBlur={setEmailIsTouched}
             />
           </Grid>
           <Grid item>
@@ -101,7 +96,7 @@ const AuthPage = () => {
               value={password}
               helperText={passwordError}
               onChange={passwordChangeHandler}
-              onBlur={() => password && setPasswordError('')}
+              onBlur={setPasswordIsTouched}
             />
           </Grid>
           <Grid item>
