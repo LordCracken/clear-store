@@ -4,7 +4,7 @@ import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } f
 
 import Product from '../../domain/entities/product';
 import { RootState, useAppDispatch } from '../store';
-import { addProduct } from '../store/cart-actions';
+import { cartActions } from '../store/cartSlice';
 
 type IProductItem = Omit<Product, 'description' | 'tags'>;
 
@@ -18,7 +18,7 @@ const ProductItem: FC<IProductItem> = ({ id }) => {
   }
 
   const addToCartHandler = () => {
-    dispatch(addProduct(product));
+    dispatch(cartActions.addProduct(product));
   };
 
   const { name, image, author, price } = product;

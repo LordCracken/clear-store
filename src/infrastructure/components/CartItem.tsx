@@ -5,7 +5,7 @@ import { Box, IconButton, ListItem, Typography } from '@mui/material';
 import { Add, Remove } from '@mui/icons-material';
 
 import { RootState, useAppDispatch } from '../store';
-import { addProduct } from '../store/cart-actions';
+import { cartActions } from '../store/cartSlice';
 
 interface ICartItem {
   id: string;
@@ -19,7 +19,7 @@ const CartItem: FC<ICartItem> = ({ id, quantity }) => {
   const { name, author, price } = product;
 
   const addItemHandler = () => {
-    dispatch(addProduct(product));
+    dispatch(cartActions.addProduct(product));
   };
 
   return (

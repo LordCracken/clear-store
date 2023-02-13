@@ -13,27 +13,6 @@ class Cart {
     this.totalPrice = totalPrice;
   }
 
-  addProduct(product: Product) {
-    const existingItemIndex = this.products.findIndex(item => item.id === product.id);
-    const existingItem = this.products[existingItemIndex];
-    let updatedCart;
-
-    if (existingItem) {
-      const updatedItem = {
-        ...existingItem,
-        price: existingItem.price + product.price,
-        quantity: existingItem.quantity + 1,
-      };
-      updatedCart = [...this.products];
-      updatedCart[existingItemIndex] = updatedItem;
-    } else {
-      updatedCart = this.products.concat({ id: product.id, price: product.price, quantity: 1 });
-    }
-
-    this.products = updatedCart;
-    this.totalPrice += product.price;
-  }
-
   removeProduct(productId: UniqueID) {
     const existingItemIndex = this.products.findIndex(item => item.id === productId);
     const existingItem = this.products.at(existingItemIndex);
