@@ -1,16 +1,21 @@
 import Product from './product';
 
-interface CartItem extends Pick<Product, 'id' | 'price'> {
+export interface CartItem extends Pick<Product, 'id' | 'price'> {
   quantity: number;
 }
 
 class Cart {
   products: CartItem[] = [];
-  totalPrice = 0;
+  totalPrice: number;
+
+  constructor(products: CartItem[], totalPrice: number) {
+    this.products = products;
+    this.totalPrice = totalPrice;
+  }
 
   addProduct(product: Product) {
     const existingItemIndex = this.products.findIndex(item => item.id === product.id);
-    const existingItem = this.products.at(existingItemIndex);
+    const existingItem = this.products[existingItemIndex];
     let updatedCart;
 
     if (existingItem) {
@@ -25,9 +30,8 @@ class Cart {
       updatedCart = this.products.concat({ id: product.id, price: product.price, quantity: 1 });
     }
 
+    this.products = updatedCart;
     this.totalPrice += product.price;
-
-    return updatedCart;
   }
 
   removeProduct(productId: UniqueID) {
@@ -52,8 +56,7 @@ class Cart {
     }
 
     this.totalPrice -= productPrice;
-
-    return updatedCart;
+    this.products = updatedCart;
   }
 
   empty() {
