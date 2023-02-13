@@ -22,6 +22,10 @@ const CartItem: FC<ICartItem> = ({ id, quantity }) => {
     dispatch(cartActions.addProduct(product));
   };
 
+  const removeItemHandler = () => {
+    dispatch(cartActions.removeProduct(product.id));
+  };
+
   return (
     <ListItem sx={{ flexDirection: 'column', alignItems: 'flex-start' }}>
       <Typography variant="body1">
@@ -34,7 +38,7 @@ const CartItem: FC<ICartItem> = ({ id, quantity }) => {
         <Typography component="span" sx={{ px: '5px' }}>
           {quantity}
         </Typography>
-        <IconButton>
+        <IconButton onClick={removeItemHandler}>
           <Remove />
         </IconButton>
       </Box>
