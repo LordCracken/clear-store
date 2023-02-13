@@ -8,6 +8,8 @@ import { signInUser } from '../store/user-actions';
 import useInput from '../hooks/useInput';
 
 const AuthPage = () => {
+  const dispatch = useAppDispatch();
+  const { user, error } = useSelector((state: RootState) => state.user);
   const [snackIsOpen, setSnackIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -27,9 +29,6 @@ const AuthPage = () => {
     setIsTouchedHandler: setPasswordIsTouched,
     valueChangeHandler: passwordChangeHandler,
   } = useInput(passwordRule, 'Пароль меньше 7 символов');
-
-  const dispatch = useAppDispatch();
-  const { user, error } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     if (user.email) {
