@@ -1,15 +1,19 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Card, CardContent, Typography } from '@mui/material';
 import { RootState } from '../store';
 
 const ProfilePage = () => {
   const { email, firstName, lastName } = useSelector((state: RootState) => state.user.user);
+  const navigate = useNavigate();
 
-  if (!email) {
-    return <Navigate to="/auth" />;
-  }
+  useEffect(() => {
+    if (!email) {
+      navigate('/auth');
+    }
+  }, []);
 
   return (
     <Card>
