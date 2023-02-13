@@ -21,7 +21,7 @@ const Cart = () => {
 
   return (
     <Drawer anchor="right" open={isOpen} onClose={closeCart}>
-      <List sx={{ width: '400px' }}>
+      <List sx={{ width: {md: '400px', xs: '300px'} }}>
         <ListItem>
           <ListItemIcon>
             <ShoppingCart />
