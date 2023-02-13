@@ -6,9 +6,7 @@ const createOrder = (user: UniqueID, cart: Cart) => {
   const uuid = generateId();
   const id = `order-${uuid}`;
 
-  const order = new Order(id, user, cart);
-  cart.empty();
-  return order;
+  return new Order(id, user, cart);
 };
 
 export default createOrder;

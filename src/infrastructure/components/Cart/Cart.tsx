@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 
 import {
+  Button,
   Divider,
   Drawer,
   List,
@@ -12,8 +13,8 @@ import {
 import { ShoppingCart } from '@mui/icons-material';
 
 import CartItem from './CartItem';
-import { RootState, useAppDispatch } from '../store';
-import { cartActions } from '../store/cartSlice';
+import { RootState, useAppDispatch } from '../../store';
+import { cartActions } from '../../store/cartSlice';
 
 const Cart = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +25,10 @@ const Cart = () => {
     dispatch(cartActions.closeCart());
   };
 
+  const createOrderHandler = () => {
+    dispatch(cartActions.empty());
+  };
+
   const hasOrder = (
     <>
       {products.map(item => (
@@ -32,6 +37,11 @@ const Cart = () => {
       <Divider />
       <ListItem>
         <Typography sx={{ fontWeight: 700 }}>Общая стоимость: {totalPrice} рублей.</Typography>
+      </ListItem>
+      <ListItem sx={{ justifyContent: 'center' }}>
+        <Button variant="outlined" onClick={createOrderHandler}>
+          Оформить заказ
+        </Button>
       </ListItem>
     </>
   );

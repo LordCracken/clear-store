@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import { Box, IconButton, ListItem, Typography } from '@mui/material';
 import { Add, Remove } from '@mui/icons-material';
 
-import { RootState, useAppDispatch } from '../store';
-import { cartActions } from '../store/cartSlice';
+import { RootState, useAppDispatch } from '../../store';
+import { cartActions } from '../../store/cartSlice';
 
 interface ICartItem {
   id: string;

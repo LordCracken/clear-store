@@ -61,6 +61,9 @@ const cartSlice = createSlice({
       state.totalPrice -= productPrice;
       state.products = updatedCart;
     },
+    empty() {
+      return initialState;
+    },
     openCart(state) {
       state.isOpen = true;
     },

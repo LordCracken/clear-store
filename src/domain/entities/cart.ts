@@ -12,11 +12,6 @@ class Cart {
     this.products = products;
     this.totalPrice = totalPrice;
   }
-
-  empty() {
-    this.products = [];
-    this.totalPrice = 0;
-  }
 }
 
 export default Cart;

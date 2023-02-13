@@ -6,7 +6,7 @@ import Header from './components/Header';
 import AuthPage from './pages/AuthPage';
 import ProductsPage from './pages/ProductsPage';
 import ProfilePage from './pages/ProfilePage';
-import Cart from './components/Cart';
+import Cart from './components/Cart/Cart';
 
 const App = () => {
   return (
