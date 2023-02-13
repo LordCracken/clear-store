@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { Box, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
 
-import { RootState, useAppDispatch } from '../store';
-import { signOutUser } from '../store/user-actions';
+import { RootState, useAppDispatch } from '../../store';
+import { signOutUser } from '../../store/user-actions';
 
 const UserMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);

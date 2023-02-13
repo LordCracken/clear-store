@@ -2,12 +2,12 @@ import { useSelector } from 'react-redux';
 import { AppBar, Badge, Container, IconButton, Toolbar } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
 
-import Logo from './Logo';
+import Logo from '../Logo';
 import UserMenu from './UserMenu';
 import SignInButton from './SignInButton';
 
-import { RootState, useAppDispatch } from '../store';
-import { cartActions } from '../store/cartSlice';
+import { RootState, useAppDispatch } from '../../store';
+import { cartActions } from '../../store/cartSlice';
 
 const Header = () => {
   const dispatch = useAppDispatch();
