@@ -5,7 +5,7 @@ interface IUserObj {
   firstName: string;
   lastName: string;
 }
-type IAuthFunc = (email: Email, password: Password, users: User[]) => IUserObj | undefined;
+type IAuthFunc = (email: Email, password: Password, users: User[]) => IUserObj | string;
 
 const identification: IAuthFunc = (email, password, users) => {
   const desiredUser = users.find(user => user.email === email);
@@ -14,6 +14,8 @@ const identification: IAuthFunc = (email, password, users) => {
     desiredUser.signIn();
     const { email, firstName, lastName } = desiredUser;
     return { email, firstName, lastName };
+  } else {
+    return 'Не найдена такая комбинация email и пароля';
   }
 };
 

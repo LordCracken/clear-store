@@ -6,6 +6,7 @@ interface IUserSlice {
     firstName: string;
     lastName: string;
   };
+  error: string;
 }
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
     firstName: '',
     lastName: '',
   },
+  error: '',
 };
 
 const userSlice = createSlice({
@@ -27,10 +29,14 @@ const userSlice = createSlice({
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
         };
+        state.error = '';
       }
     },
     signOut(state) {
       state.user = initialState.user;
+    },
+    setError(state, action) {
+      state.error = action.payload;
     },
   },
 });

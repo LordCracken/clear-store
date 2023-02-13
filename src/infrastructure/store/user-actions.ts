@@ -8,13 +8,16 @@ import { userActions } from './user-slice';
 
 export const signInUser = (email: Email, password: Password) => async (dispatch: Dispatch) => {
   //  sending data & get response
-  const user = await new Promise(resolve => {
+  const response = await new Promise(resolve => {
     resolve(signIn(data, email, password));
   });
 
   //  check data
-
-  dispatch(userActions.signIn(user));
+  if (typeof response === 'string') {
+    dispatch(userActions.setError(response));
+  } else {
+    dispatch(userActions.signIn(response));
+  }
 };
 
 export const signOutUser = (email: Email) => async (dispatch: Dispatch) => {
