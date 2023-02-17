@@ -1,8 +1,11 @@
-import { Grid } from '@mui/material';
-import ProductItem from '../components/ProductItem';
-import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '../store';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+// MUI
+import { Grid } from '@mui/material';
+// Components
+import ProductItem from '../components/ProductItem';
+// Store
+import { RootState, useAppDispatch } from '../store';
 import { fetchProductsData } from '../store/products';
 
 const ProductsPage = () => {

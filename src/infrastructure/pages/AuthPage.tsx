@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+// MUI
 import { Alert, AlertTitle, Box, Button, Grid, Snackbar, TextField } from '@mui/material';
+// Store
 import { RootState, useAppDispatch } from '../store';
 import { signInUser } from '../store/user';
+// Shared
 import useInput from '../hooks/useInput';
 
 const AuthPage = () => {

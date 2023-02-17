@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+// MUI
 import { Card, CardContent, Typography } from '@mui/material';
+// Store
 import { RootState } from '../store';
 
 const ProfilePage = () => {

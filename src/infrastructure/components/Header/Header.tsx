@@ -1,11 +1,12 @@
 import { useSelector } from 'react-redux';
+// MUI
 import { AppBar, Badge, Container, IconButton, Toolbar } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
-
+// Components
 import Logo from '../Logo';
 import UserMenu from './UserMenu';
 import SignInButton from './SignInButton';
-
+// Store
 import { RootState, useAppDispatch } from '../../store';
 import { cartActions } from '../../store/cart';
 

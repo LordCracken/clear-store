@@ -1,10 +1,12 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
+// MUI
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
-
-import Product from '../../domain/entities/product';
+// Store
 import { RootState, useAppDispatch } from '../store';
 import { cartActions } from '../store/cart';
+// Interfaces
+import Product from '../../domain/entities/product';
 
 type IProductItem = Omit<Product, 'description' | 'tags'>;
 

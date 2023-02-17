@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
-
+// MUI
 import { Container } from '@mui/material';
-
+// Components
 import Header from './components/Header/Header';
 import AuthPage from './pages/AuthPage';
 import ProductsPage from './pages/ProductsPage';

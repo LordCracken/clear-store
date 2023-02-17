@@ -1,9 +1,12 @@
-import { Button, Divider, ListItem, Typography } from '@mui/material';
-import CartItem from './CartItem';
-import { RootState, useAppDispatch } from '../../store';
 import { useSelector } from 'react-redux';
-import { cartActions } from '../../store/cart';
 import { useNavigate } from 'react-router-dom';
+// MUI
+import { Button, Divider, ListItem, Typography } from '@mui/material';
+// Components
+import CartItem from './CartItem';
+// Store
+import { RootState, useAppDispatch } from '../../store';
+import { cartActions } from '../../store/cart';
 
 const CartList = () => {
   const dispatch = useAppDispatch();

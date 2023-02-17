@@ -1,10 +1,10 @@
 import { MouseEvent, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+// MUI
 import { Box, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
-
+// Store
 import { RootState, useAppDispatch } from '../../store';
 import { signOutUser } from '../../store/user';
 

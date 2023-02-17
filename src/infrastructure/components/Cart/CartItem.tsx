@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
-
+// MUI
 import { Box, IconButton, ListItem, Typography } from '@mui/material';
 import { Add, Remove } from '@mui/icons-material';
-
+// Store
 import { RootState, useAppDispatch } from '../../store';
 import { cartActions } from '../../store/cart';
 

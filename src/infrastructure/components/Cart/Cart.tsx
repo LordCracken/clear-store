@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
-
+// MUI
 import { Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
-
+// Components
 import CartList from './CartList';
+// Store
 import { RootState, useAppDispatch } from '../../store';
 import { cartActions } from '../../store/cart';
 
