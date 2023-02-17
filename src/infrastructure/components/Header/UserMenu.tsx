@@ -6,7 +6,7 @@ import { Box, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/mater
 import { AccountCircle } from '@mui/icons-material';
 
 import { RootState, useAppDispatch } from '../../store';
-import { signOutUser } from '../../store/user/user-actions';
+import { signOutUser } from '../../store/user';
 
 const UserMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);

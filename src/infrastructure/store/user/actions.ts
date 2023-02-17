@@ -4,7 +4,7 @@ import signIn from '../../../adapters/signIn';
 import signOut from '../../../adapters/signOut';
 
 import data from '../../data';
-import { userActions } from './user-slice';
+import { userActions } from './slice';
 
 export const signInUser = (email: Email, password: Password) => async (dispatch: Dispatch) => {
   //  sending data & get response

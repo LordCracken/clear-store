@@ -18,7 +18,7 @@ const initialState = {
   error: '',
 };
 
-const userSlice = createSlice({
+const slice = createSlice({
   name: 'user',
   initialState: initialState as IUserSlice,
   reducers: {
@@ -41,5 +41,5 @@ const userSlice = createSlice({
   },
 });
 
-export const userActions = userSlice.actions;
-export default userSlice.reducer;
+export const userActions = slice.actions;
+export default slice.reducer;

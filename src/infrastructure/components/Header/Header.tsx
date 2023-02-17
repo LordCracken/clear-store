@@ -7,7 +7,7 @@ import UserMenu from './UserMenu';
 import SignInButton from './SignInButton';
 
 import { RootState, useAppDispatch } from '../../store';
-import { cartActions } from '../../store/cart/cartSlice';
+import { cartActions } from '../../store/cart';
 
 const Header = () => {
   const dispatch = useAppDispatch();

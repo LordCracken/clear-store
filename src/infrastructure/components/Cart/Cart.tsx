@@ -5,7 +5,7 @@ import { ShoppingCart } from '@mui/icons-material';
 
 import CartList from './CartList';
 import { RootState, useAppDispatch } from '../../store';
-import { cartActions } from '../../store/cart/cartSlice';
+import { cartActions } from '../../store/cart';
 
 const Cart = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ const Cart = () => {
 
   return (
     <Drawer anchor="right" open={isOpen} onClose={closeCart}>
-      <List sx={{ width: {md: '400px', xs: '300px'} }}>
+      <List sx={{ width: { md: '400px', xs: '300px' } }}>
         <ListItem>
           <ListItemIcon>
             <ShoppingCart />

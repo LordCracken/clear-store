@@ -4,7 +4,7 @@ import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } f
 
 import Product from '../../domain/entities/product';
 import { RootState, useAppDispatch } from '../store';
-import { cartActions } from '../store/cart/cartSlice';
+import { cartActions } from '../store/cart';
 
 type IProductItem = Omit<Product, 'description' | 'tags'>;
 

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Alert, AlertTitle, Box, Button, Grid, Snackbar, TextField } from '@mui/material';
 import { RootState, useAppDispatch } from '../store';
-import { signInUser } from '../store/user/user-actions';
+import { signInUser } from '../store/user';
 import useInput from '../hooks/useInput';
 
 const AuthPage = () => {
