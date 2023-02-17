@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux';
 import { Box, IconButton, ListItem, Typography } from '@mui/material';
 import { Add, Remove } from '@mui/icons-material';
 // Store
-import { RootState, useAppDispatch } from '../../store';
+import { useAppDispatch } from '../../store';
 import { cartActions } from '../../store/cart';
+import { selectProductItem } from '../../store/products';
 
 interface ICartItem {
   id: string;
@@ -14,8 +15,7 @@ interface ICartItem {
 
 const CartItem: FC<ICartItem> = ({ id, quantity }) => {
   const dispatch = useAppDispatch();
-  const products = useSelector((state: RootState) => state.products.products);
-  const product = products.find(item => item.id === id)!;
+  const product = useSelector(selectProductItem(id))!;
   const { name, author, price } = product;
 
   const addItemHandler = () => {

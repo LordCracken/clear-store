@@ -5,11 +5,11 @@ import { Grid } from '@mui/material';
 // Components
 import ProductItem from '../components/ProductItem';
 // Store
-import { RootState, useAppDispatch } from '../store';
-import { fetchProductsData } from '../store/products';
+import { useAppDispatch } from '../store';
+import { fetchProductsData, selectProducts } from '../store/products';
 
 const ProductsPage = () => {
-  const products = useSelector((state: RootState) => state.products.products);
+  const products = useSelector(selectProducts);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

@@ -3,8 +3,9 @@ import { useSelector } from 'react-redux';
 // MUI
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 // Store
-import { RootState, useAppDispatch } from '../store';
+import { useAppDispatch } from '../store';
 import { cartActions } from '../store/cart';
+import { selectProductItem } from '../store/products';
 // Interfaces
 import Product from '../../domain/entities/product';
 
@@ -12,8 +13,7 @@ type IProductItem = Omit<Product, 'description' | 'tags'>;
 
 const ProductItem: FC<IProductItem> = ({ id }) => {
   const dispatch = useAppDispatch();
-  const allProducts = useSelector((state: RootState) => state.products.products);
-  const product = allProducts.find(item => item.id === id);
+  const product = useSelector(selectProductItem(id));
 
   if (!product) {
     return null;

@@ -5,13 +5,13 @@ import { ShoppingCart } from '@mui/icons-material';
 // Components
 import CartList from './CartList';
 // Store
-import { RootState, useAppDispatch } from '../../store';
-import { cartActions } from '../../store/cart';
+import { useAppDispatch } from '../../store';
+import { cartActions, selectCartIsOpen, selectCartProducts } from '../../store/cart';
 
 const Cart = () => {
   const dispatch = useAppDispatch();
-  const { products } = useSelector((state: RootState) => state.cart);
-  const isOpen = useSelector((state: RootState) => state.cart.isOpen);
+  const products = useSelector(selectCartProducts);
+  const isOpen = useSelector(selectCartIsOpen);
 
   const closeCart = () => {
     dispatch(cartActions.closeCart());

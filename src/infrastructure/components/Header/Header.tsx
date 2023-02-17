@@ -7,13 +7,14 @@ import Logo from '../Logo';
 import UserMenu from './UserMenu';
 import SignInButton from './SignInButton';
 // Store
-import { RootState, useAppDispatch } from '../../store';
-import { cartActions } from '../../store/cart';
+import { useAppDispatch } from '../../store';
+import { cartActions, selectCartProducts } from '../../store/cart';
+import { selectUser } from '../../store/user';
 
 const Header = () => {
   const dispatch = useAppDispatch();
-  const user = useSelector((state: RootState) => state.user.user);
-  const cartLength = useSelector((state: RootState) => state.cart.products).length;
+  const user = useSelector(selectUser);
+  const cartLength = useSelector(selectCartProducts).length;
   const isAuth = !!user.email;
 
   const openCart = () => {

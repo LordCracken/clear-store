@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import { Box, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
 // Store
-import { RootState, useAppDispatch } from '../../store';
-import { signOutUser } from '../../store/user';
+import { useAppDispatch } from '../../store';
+import { signOutUser, selectUserEmail } from '../../store/user';
 
 const UserMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const user = useSelector((state: RootState) => state.user.user);
+  const userEmail = useSelector(selectUserEmail);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ const UserMenu = () => {
       label: 'Выйти',
       action: () => {
         navigate('./');
-        dispatch(signOutUser(user.email));
+        dispatch(signOutUser(userEmail));
       },
     },
   ];

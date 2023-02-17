@@ -1,16 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import Product from '../../../domain/entities/product';
 
-interface Slice {
-  products: Product[];
-}
-
 const productsSlice = createSlice({
   name: 'products',
-  initialState: { products: [] } as Slice,
+  initialState: [] as Product[],
   reducers: {
     setProducts(state, action) {
-      state.products = action.payload;
+      return action.payload;
     },
   },
 });
