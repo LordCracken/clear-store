@@ -3,7 +3,7 @@ import ProductItem from '../components/ProductItem';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../store';
 import { useEffect } from 'react';
-import { fetchProductsData } from '../store/products-actions';
+import { fetchProductsData } from '../store/products/products-actions';
 
 const ProductsPage = () => {
   const products = useSelector((state: RootState) => state.products.products);

@@ -1,9 +1,9 @@
 import { Dispatch } from '@reduxjs/toolkit';
 
-import signIn from '../../adapters/signIn';
-import signOut from '../../adapters/signOut';
+import signIn from '../../../adapters/signIn';
+import signOut from '../../../adapters/signOut';
 
-import data from '../data';
+import data from '../../data';
 import { userActions } from './user-slice';
 
 export const signInUser = (email: Email, password: Password) => async (dispatch: Dispatch) => {

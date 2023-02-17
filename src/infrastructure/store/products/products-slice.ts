@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import Product from '../../domain/entities/product';
+import Product from '../../../domain/entities/product';
 
 interface ProductsSlice {
   products: Product[];

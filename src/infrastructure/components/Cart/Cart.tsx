@@ -5,7 +5,7 @@ import { ShoppingCart } from '@mui/icons-material';
 
 import CartList from './CartList';
 import { RootState, useAppDispatch } from '../../store';
-import { cartActions } from '../../store/cartSlice';
+import { cartActions } from '../../store/cart/cartSlice';
 
 const Cart = () => {
   const dispatch = useAppDispatch();

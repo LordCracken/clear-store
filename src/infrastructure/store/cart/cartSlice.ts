@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import Cart from '../../domain/entities/cart';
+import Cart from '../../../domain/entities/cart';
 
 interface ICart extends Pick<Cart, 'products' | 'totalPrice'> {
   isOpen: boolean;

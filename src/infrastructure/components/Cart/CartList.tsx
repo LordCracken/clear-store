@@ -2,7 +2,7 @@ import { Button, Divider, ListItem, Typography } from '@mui/material';
 import CartItem from './CartItem';
 import { RootState, useAppDispatch } from '../../store';
 import { useSelector } from 'react-redux';
-import { cartActions } from '../../store/cartSlice';
+import { cartActions } from '../../store/cart/cartSlice';
 import { useNavigate } from 'react-router-dom';
 
 const CartList = () => {
