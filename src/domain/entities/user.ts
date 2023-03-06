@@ -1,9 +1,9 @@
 class User {
   readonly id: UniqueID;
-  firstName: string;
-  lastName: string;
-  email: Email;
-  password: Password;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly email: Email;
+  readonly password: Password;
   isAuth = false;
 
   constructor(id: UniqueID, firstName: string, lastName: string, email: Email, password: Password) {

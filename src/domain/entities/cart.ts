@@ -1,12 +1,17 @@
-import Product from './product';
+import {IProduct} from './product';
 
-export interface CartItem extends Pick<Product, 'id' | 'price'> {
+export interface CartItem extends Pick<IProduct, 'id' | 'price'> {
   quantity: number;
 }
 
-interface Cart {
+interface ICart {
   products: CartItem[];
   totalPrice: number;
+}
+
+export class Cart implements ICart {
+  products = [];
+  totalPrice = 0;
 }
 
 export default Cart;

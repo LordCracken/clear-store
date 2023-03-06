@@ -6,10 +6,10 @@ enum OrderStatuses {
 }
 
 class Order {
-  id: UniqueID;
-  user: UniqueID;
-  cart: Cart;
-  startTime: DateTime;
+  readonly id: UniqueID;
+  readonly user: UniqueID;
+  readonly cart: Cart;
+  readonly startTime: DateTime;
   completeTime: DateTime = '';
   status: OrderStatuses = OrderStatuses.New;
   private dateOptions: Intl.DateTimeFormatOptions = {
