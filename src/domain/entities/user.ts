@@ -1,4 +1,4 @@
-class User {
+export class User {
   readonly id: UniqueID;
   readonly firstName: string;
   readonly lastName: string;

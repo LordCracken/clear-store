@@ -7,7 +7,7 @@ export interface IProduct {
   price: number;
 }
 
-class Product implements IProduct {
+export class Product implements IProduct {
   readonly id;
   name;
   author;

@@ -5,7 +5,7 @@ enum OrderStatuses {
   Completed,
 }
 
-class Order {
+export class Order {
   readonly id: UniqueID;
   readonly user: UniqueID;
   readonly cart: Cart;
@@ -37,5 +37,3 @@ class Order {
     this.completeTime = date.toLocaleString('ru', this.dateOptions);
   }
 }
-
-export default Order;
