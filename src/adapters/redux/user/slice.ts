@@ -1,45 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { CartData, OrderData } from '../../../domain/entities/DTO';
 
-interface IUserSlice {
-  user: {
-    email: Email;
-    firstName: string;
-    lastName: string;
-  };
-  error: string;
+interface IUser {
+  isAuthenticated: boolean;
+  firstName: string;
+  lastName: string;
+  cart?: CartData;
+  orders?: OrderData[];
+  status?: Statuses;
+  statusMsg?: string;
 }
 
-const initialState = {
-  user: {
-    email: '',
-    firstName: '',
-    lastName: '',
-  },
-  error: '',
-};
+const initialState: IUser = { isAuthenticated: false, firstName: '', lastName: '' };
 
-const slice = createSlice({
+const userSlice = createSlice({
   name: 'user',
-  initialState: initialState as IUserSlice,
+  initialState: initialState,
   reducers: {
-    signIn(state, action) {
-      if (action.payload) {
-        state.user = {
-          email: action.payload.email,
-          firstName: action.payload.firstName,
-          lastName: action.payload.lastName,
-        };
-        state.error = '';
-      }
+    updateStatus: (state, action) => {
+      state.status = action.payload.status;
+      state.statusMsg = action.payload.message;
     },
-    signOut(state) {
-      state.user = initialState.user;
+    signIn: (state, action) => {
+      return { ...state, ...action.payload, isAuthenticated: true };
     },
-    setError(state, action) {
-      state.error = action.payload;
-    },
+    signOut: () => initialState,
   },
 });
 
-export const userActions = slice.actions;
-export default slice.reducer;
+export const userActions = userSlice.actions;
+export default userSlice.reducer;
