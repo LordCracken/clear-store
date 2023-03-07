@@ -1,8 +1,10 @@
 import { User } from '../entities';
 
-export type SignInService = (email: Email, password: Password) => Promise<User>;
+export interface SignInService {
+  signIn: (email: Email, password: Password) => Promise<User>;
+}
 
-export class signIn {
+export class SignInCase {
   signInService: SignInService;
 
   constructor(service: SignInService) {
@@ -10,6 +12,6 @@ export class signIn {
   }
 
   async signIn(email: Email, password: Password) {
-    return this.signInService(email, password);
+    return this.signInService.signIn(email, password);
   }
 }
