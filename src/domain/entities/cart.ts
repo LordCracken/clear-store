@@ -1,11 +1,11 @@
-import {IProduct} from './product';
-
-export interface CartItem extends Pick<IProduct, 'id' | 'price'> {
+export interface CartItem {
+  readonly id: UniqueID;
+  price: number;
   quantity: number;
 }
 
 interface ICart {
-  products: CartItem[];
+  readonly products: CartItem[];
   totalPrice: number;
 }
 

@@ -1,10 +1,10 @@
 export interface IProduct {
-  id: UniqueID;
-  name: string;
-  author: string;
-  image: ImageURL;
-  description: string;
-  price: number;
+  readonly id: UniqueID;
+  readonly name: string;
+  readonly author: string;
+  readonly image: ImageURL;
+  readonly description: string;
+  readonly price: number;
 }
 
 export class Product implements IProduct {
