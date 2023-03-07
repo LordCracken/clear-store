@@ -2,7 +2,7 @@ import { Cart, Order, User } from '../entities';
 
 export type CreateOrderService = (user: User, cart: Cart) => Promise<Order>;
 
-export class createOrder {
+export class createOrderCase {
   service: CreateOrderService;
 
   constructor(service: CreateOrderService) {

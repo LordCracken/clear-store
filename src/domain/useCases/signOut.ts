@@ -1,6 +1,6 @@
 export type SignOutService = () => Promise<void>;
 
-export class signOut {
+export class signOutCase {
   service: SignOutService;
 
   constructor(service: SignOutService) {
