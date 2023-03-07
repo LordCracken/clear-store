@@ -13,5 +13,3 @@ export class Cart implements ICart {
   products = [];
   totalPrice = 0;
 }
-
-export default Cart;

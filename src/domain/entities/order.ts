@@ -1,4 +1,4 @@
-import Cart from './cart';
+import { Cart } from './cart';
 
 enum OrderStatuses {
   New,
