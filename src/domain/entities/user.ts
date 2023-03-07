@@ -1,15 +1,15 @@
+import { CartData, OrderData } from './DTO';
+
 export class User {
-  readonly id: UniqueID;
   readonly firstName: string;
   readonly lastName: string;
-  readonly email: Email;
-  readonly password: Password;
+  readonly cart: CartData;
+  readonly orders: OrderData[];
 
-  constructor(id: UniqueID, firstName: string, lastName: string, email: Email, password: Password) {
-    this.id = id;
+  constructor(firstName: string, lastName: string, cart: CartData, orders: OrderData[]) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.email = email;
-    this.password = password;
+    this.cart = cart;
+    this.orders = orders;
   }
 }
