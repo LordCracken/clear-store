@@ -1,12 +1,15 @@
-import Order from '../entities/order';
-import Cart from '../entities/cart';
-import generateId from '../lib/generateId';
+import { Cart, Order, User } from '../entities';
 
-const createOrder = (user: UniqueID, cart: Cart) => {
-  const uuid = generateId();
-  const id = `order-${uuid}`;
+export type CreateOrderService = (user: User, cart: Cart) => Promise<Order>;
 
-  return new Order(id, user, cart);
-};
+export class createOrder {
+  service: CreateOrderService;
 
-export default createOrder;
+  constructor(service: CreateOrderService) {
+    this.service = service;
+  }
+
+  async createOrder(user: User, cart: Cart) {
+    return this.service(user, cart);
+  }
+}
