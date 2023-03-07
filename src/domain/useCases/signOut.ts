@@ -1,13 +1,15 @@
-export type SignOutService = () => Promise<void>;
+export interface SignOutService {
+  signOut: () => Promise<void>;
+}
 
-export class signOutCase {
-  service: SignOutService;
+export class SignOutCase {
+  signOutService: SignOutService;
 
   constructor(service: SignOutService) {
-    this.service = service;
+    this.signOutService = service;
   }
 
   async signOut() {
-    await this.service();
+    await this.signOutService.signOut();
   }
 }
