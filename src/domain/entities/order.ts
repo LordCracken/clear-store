@@ -1,6 +1,6 @@
-import { Cart } from './cart';
+import { CartData } from './DTO';
 
-enum OrderStatuses {
+export enum OrderStatuses {
   New,
   Completed,
 }
@@ -8,7 +8,7 @@ enum OrderStatuses {
 export class Order {
   readonly id: UniqueID;
   readonly user: UniqueID;
-  readonly cart: Cart;
+  readonly cart: CartData;
   readonly startTime: DateTime;
   completeTime: DateTime = '';
   status: OrderStatuses = OrderStatuses.New;
@@ -21,7 +21,7 @@ export class Order {
     second: 'numeric',
   };
 
-  constructor(id: UniqueID, user: UniqueID, cart: Cart) {
+  constructor(id: UniqueID, user: UniqueID, cart: CartData) {
     this.id = id;
     this.user = user;
     this.cart = cart;
