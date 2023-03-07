@@ -31,5 +31,3 @@ export class Product implements IProduct {
     this.price = price;
   }
 }
-
-export default Product;
