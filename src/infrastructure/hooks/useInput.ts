@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 
 type ruleFunc = (value: string) => boolean;
 
-const useInput = (rule: ruleFunc, message: string) => {
+export const useInput = (rule: ruleFunc, message: string) => {
   const [value, setValue] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [isTouched, setIsTouched] = useState<boolean>(false);
@@ -28,5 +28,3 @@ const useInput = (rule: ruleFunc, message: string) => {
     valueChangeHandler,
   };
 };
-
-export default useInput;
