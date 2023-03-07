@@ -5,8 +5,8 @@ import { Button, Divider, ListItem, Typography } from '@mui/material';
 // Components
 import CartItem from './CartItem';
 // Store
-import { RootState, useAppDispatch } from '../../store';
-import { cartActions } from '../../store/cart';
+import { RootState, useAppDispatch } from '../../../adapters/redux';
+import { cartActions } from '../../../adapters/redux/cart';
 
 const CartList = () => {
   const dispatch = useAppDispatch();

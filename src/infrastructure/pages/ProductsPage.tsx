@@ -5,8 +5,8 @@ import { Grid } from '@mui/material';
 // Components
 import ProductItem from '../components/ProductItem';
 // Store
-import { useAppDispatch } from '../store';
-import { fetchProductsData, selectProducts } from '../store/products';
+import { useAppDispatch } from '../../adapters/redux';
+import { fetchProductsData, selectProducts } from '../../adapters/redux/products';
 
 const ProductsPage = () => {
   const products = useSelector(selectProducts);

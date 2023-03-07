@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 // MUI
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 // Store
-import { useAppDispatch } from '../store';
-import { cartActions } from '../store/cart';
-import { selectProductItem } from '../store/products';
+import { useAppDispatch } from '../../adapters/redux';
+import { cartActions } from '../../adapters/redux/cart';
+import { selectProductItem } from '../../adapters/redux/products';
 // Interfaces
 import Product from '../../domain/entities/product';
 

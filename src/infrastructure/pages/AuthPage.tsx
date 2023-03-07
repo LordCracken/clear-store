@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 // MUI
 import { Alert, AlertTitle, Box, Button, Grid, Snackbar, TextField } from '@mui/material';
 // Store
-import { RootState, useAppDispatch } from '../store';
-import { signInUser } from '../store/user';
+import { RootState, useAppDispatch } from '../../adapters/redux';
+import { signInUser } from '../../adapters/redux/user';
 // Shared
 import useInput from '../hooks/useInput';
 

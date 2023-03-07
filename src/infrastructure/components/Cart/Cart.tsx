@@ -5,8 +5,8 @@ import { ShoppingCart } from '@mui/icons-material';
 // Components
 import CartList from './CartList';
 // Store
-import { useAppDispatch } from '../../store';
-import { cartActions, selectCartIsOpen, selectCartProducts } from '../../store/cart';
+import { useAppDispatch } from '../../../adapters/redux';
+import { cartActions, selectCartIsOpen, selectCartProducts } from '../../../adapters/redux/cart';
 
 const Cart = () => {
   const dispatch = useAppDispatch();

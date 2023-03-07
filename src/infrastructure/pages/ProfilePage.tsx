@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 // MUI
 import { Card, CardContent, Typography } from '@mui/material';
 // Store
-import { RootState } from '../store';
+import { RootState } from '../../adapters/redux';
 
 const ProfilePage = () => {
   const { email, firstName, lastName } = useSelector((state: RootState) => state.user.user);

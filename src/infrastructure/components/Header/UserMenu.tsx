@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { Box, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
 // Store
-import { useAppDispatch } from '../../store';
-import { signOutUser, selectUserEmail } from '../../store/user';
+import { useAppDispatch } from '../../../adapters/redux';
+import { signOutUser, selectUserEmail } from '../../../adapters/redux/user';
 
 const UserMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);

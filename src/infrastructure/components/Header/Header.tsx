@@ -7,9 +7,9 @@ import Logo from '../Logo';
 import UserMenu from './UserMenu';
 import SignInButton from './SignInButton';
 // Store
-import { useAppDispatch } from '../../store';
-import { cartActions, selectCartProducts } from '../../store/cart';
-import { selectUser } from '../../store/user';
+import { useAppDispatch } from '../../../adapters/redux';
+import { cartActions, selectCartProducts } from '../../../adapters/redux/cart';
+import { selectUser } from '../../../adapters/redux/user';
 
 const Header = () => {
   const dispatch = useAppDispatch();

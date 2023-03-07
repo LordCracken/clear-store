@@ -1,6 +1,6 @@
 import { Dispatch } from '@reduxjs/toolkit';
 import getProducts from '../../../adapters/getProducts';
-import data from '../../data';
+import data from '../../../infrastructure/data';
 import { productsActions } from './slice';
 
 export const fetchProductsData = () => async (dispatch: Dispatch) => {
