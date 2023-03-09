@@ -12,3 +12,4 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 export * from './auth';
+export * from './products';
