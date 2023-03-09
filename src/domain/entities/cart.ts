@@ -19,8 +19,4 @@ export class Cart implements ICart {
       this.products.set(id, quantity - 1);
     }
   }
-
-  empty() {
-    this.products.clear();
-  }
 }
