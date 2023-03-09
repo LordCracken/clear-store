@@ -5,11 +5,11 @@ import { Alert, AlertTitle, Box, Button, Grid, Snackbar, TextField } from '@mui/
 // Store
 import { signInAction } from '../../adapters/redux/user';
 // Shared
-import {useAppDispatch, useAppSelector, useInput} from '../hooks';
+import { useAppDispatch, useAppSelector, useInput } from '../hooks';
 
 const AuthPage = () => {
   const dispatch = useAppDispatch();
-  const {isAuthenticated, status, statusMsg} = useAppSelector(state => state.user);
+  const { isAuthenticated, status, statusMsg } = useAppSelector(state => state.user);
   const [snackIsOpen, setSnackIsOpen] = useState(false);
   const navigate = useNavigate();
 
