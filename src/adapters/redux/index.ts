@@ -4,12 +4,10 @@ import products from './products/slice';
 import user from './user/slice';
 import cart from './cart/slice';
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     products,
     user,
     cart,
   },
 });
-
-export default store;
