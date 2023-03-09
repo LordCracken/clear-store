@@ -1,44 +1,22 @@
-export interface CartItem {
-  readonly id: UniqueID;
-  price: number;
-  quantity: number;
-}
-
 interface ICart {
-  readonly products: CartItem[];
-  totalPrice: number;
+  readonly products: Map<UniqueID, number>;
 }
 
 export class Cart implements ICart {
-  products: CartItem[] = [];
-  totalPrice = 0;
+  products = new Map<UniqueID, number>();
 
-  addProduct(id: UniqueID, price: number) {
-    const existingItemIndex = this.products.findIndex(item => item.id === id);
-
-    if (existingItemIndex) {
-      this.products[existingItemIndex].price += price;
-      this.products[existingItemIndex].quantity += 1;
-    } else {
-      this.products.concat({ id, price, quantity: 1 });
-    }
-
-    this.totalPrice += price;
+  addProduct(id: UniqueID) {
+    const quantity = this.products.get(id) ?? 0;
+    this.products.set(id, quantity + 1);
   }
 
-  removeProduct(productId: UniqueID, price: number) {
-    const existingItemIndex = this.products.findIndex(item => item.id === productId);
-    const existingItem = this.products.at(existingItemIndex);
+  removeProduct(id: UniqueID) {
+    const quantity = this.products.get(id) ?? 0;
 
-    if (!existingItem) return;
-
-    if (existingItem.quantity === 1) {
-      this.products = this.products.filter(item => item.id !== productId);
+    if (quantity <= 1) {
+      this.products.delete(id);
     } else {
-      this.products[existingItemIndex].price -= price;
-      this.products[existingItemIndex].quantity -= 1;
+      this.products.set(id, quantity - 1);
     }
-
-    this.totalPrice -= price;
   }
 }
