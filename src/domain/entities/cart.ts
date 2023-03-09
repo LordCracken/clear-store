@@ -1,9 +1,20 @@
+type Products = Map<UniqueID, number>;
+
 interface ICart {
-  readonly products: Map<UniqueID, number>;
+  readonly products: Products;
+}
+
+export interface CartItem {
+  id: UniqueID;
+  quantity: number;
 }
 
 export class Cart implements ICart {
-  products = new Map<UniqueID, number>();
+  products: Products = new Map();
+
+  constructor(products: CartItem[]) {
+    products.forEach(({ id, quantity }) => this.products.set(id, quantity));
+  }
 
   addProduct(id: UniqueID) {
     const quantity = this.products.get(id) ?? 0;
