@@ -5,17 +5,19 @@ import { Button, Divider, ListItem, Typography } from '@mui/material';
 // Components
 import CartItem from './CartItem';
 // Store
-import { RootState, useAppDispatch } from '../../../adapters/redux';
 import { cartActions } from '../../../adapters/redux/cart';
+import { selectIsAuth } from '../../../adapters/redux/user';
+// shared
+import { useAppDispatch, useAppSelector } from '../../hooks';
 
 const CartList = () => {
   const dispatch = useAppDispatch();
-  const { products, totalPrice } = useSelector((state: RootState) => state.cart);
-  const { email } = useSelector((state: RootState) => state.user.user);
+  const { products, totalPrice } = useAppSelector(state => state.cart);
+  const isAuth = useSelector(selectIsAuth);
   const navigate = useNavigate();
 
   const createOrderHandler = () => {
-    if (!email) {
+    if (!isAuth) {
       navigate('/auth');
       dispatch(cartActions.closeCart());
       return;

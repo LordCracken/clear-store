@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // MUI
 import { Card, CardContent, Typography } from '@mui/material';
-// Store
-import { RootState } from '../../adapters/redux';
+// shared
+import { useAppSelector } from '../hooks';
 
 const ProfilePage = () => {
-  const { email, firstName, lastName } = useSelector((state: RootState) => state.user.user);
+  const { isAuthenticated, firstName, lastName } = useAppSelector(state => state.user);
   const navigate = useNavigate();
 
   useEffect(() => {

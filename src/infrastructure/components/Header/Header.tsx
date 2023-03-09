@@ -7,15 +7,15 @@ import Logo from '../Logo';
 import UserMenu from './UserMenu';
 import SignInButton from './SignInButton';
 // Store
-import { useAppDispatch } from '../../../adapters/redux';
 import { cartActions, selectCartProducts } from '../../../adapters/redux/cart';
-import { selectUser } from '../../../adapters/redux/user';
+import { selectIsAuth } from '../../../adapters/redux/user';
+// shared
+import { useAppDispatch } from '../../hooks';
 
 const Header = () => {
   const dispatch = useAppDispatch();
-  const user = useSelector(selectUser);
   const cartLength = useSelector(selectCartProducts).length;
-  const isAuth = !!user.email;
+  const isAuth = useSelector(selectIsAuth);
 
   const openCart = () => {
     dispatch(cartActions.openCart());

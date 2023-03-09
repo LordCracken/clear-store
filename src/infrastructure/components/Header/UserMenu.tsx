@@ -1,16 +1,15 @@
 import { MouseEvent, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // MUI
 import { Box, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
 // Store
-import { useAppDispatch } from '../../../adapters/redux';
-import { signOutUser, selectUserEmail } from '../../../adapters/redux/user';
+import { signOutAction } from '../../../adapters/redux/user';
+// shared
+import { useAppDispatch } from '../../hooks';
 
 const UserMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const userEmail = useSelector(selectUserEmail);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -25,7 +24,7 @@ const UserMenu = () => {
       label: 'Выйти',
       action: () => {
         navigate('./');
-        dispatch(signOutUser(userEmail));
+        dispatch(signOutAction());
       },
     },
   ];
