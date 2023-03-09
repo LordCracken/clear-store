@@ -1,9 +1,8 @@
-import AppData from '../../adapters/appData';
-import User from '../../domain/entities/user';
+import { User } from '../../domain/entities';
 
-const database: AppData = {
+const database = {
   orders: [],
-  users: [new User('test-user', 'Владислав', 'Якимовский', 'test@testmail.com', '1234567')],
+  users: [new User('Владислав', 'Якимовский', { products: [], totalPrice: 0 }, [])],
   products: [
     {
       id: 'js01',
