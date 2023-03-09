@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // MUI
 import { Alert, AlertTitle, Box, Button, Grid, Snackbar, TextField } from '@mui/material';
 // Store
-import { RootState, useAppDispatch } from '../../adapters/redux';
-import { signInUser } from '../../adapters/redux/user';
+import { signInAction } from '../../adapters/redux/user';
 // Shared
-import useInput from '../hooks/useInput';
+import {useAppDispatch, useAppSelector, useInput} from '../hooks';
 
 const AuthPage = () => {
   const dispatch = useAppDispatch();
-  const { user, error } = useSelector((state: RootState) => state.user);
+  const {isAuthenticated, status, statusMsg} = useAppSelector(state => state.user);
   const [snackIsOpen, setSnackIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -33,10 +31,10 @@ const AuthPage = () => {
   } = useInput(passwordRule, 'Пароль меньше 7 символов');
 
   useEffect(() => {
-    if (user.email) {
+    if (isAuthenticated) {
       navigate('/');
     }
-  }, [user.email]);
+  }, [isAuthenticated]);
 
   const signInHandler = () => {
     setEmailIsTouched();
@@ -46,9 +44,9 @@ const AuthPage = () => {
       return;
     }
 
-    dispatch(signInUser(email, password));
+    dispatch(signInAction(email, password));
 
-    if (error) {
+    if (status === 'error') {
       setSnackIsOpen(true);
     }
   };
@@ -115,7 +113,7 @@ const AuthPage = () => {
       >
         <Alert severity="error" onClose={closeSnackHandler}>
           <AlertTitle>Ошибка!</AlertTitle>
-          {error}
+          {statusMsg}
         </Alert>
       </Snackbar>
     </>
