@@ -1,15 +1,16 @@
 import { Dispatch } from '@reduxjs/toolkit';
-import getProducts from '../../../adapters/getProducts';
-import data from '../../../infrastructure/data';
 import { productsActions } from './slice';
+import { ProductsService } from '../../gateways';
+import { GetProductsCase } from '../../../domain/useCases/getProducts';
 
 export const fetchProductsData = () => async (dispatch: Dispatch) => {
-  //  fetching data
-  const products = await new Promise(resolve => {
-    resolve(getProducts(data));
-  });
+  try {
+    const service = new ProductsService();
+    const useCase = new GetProductsCase(service);
+    const products = await useCase.getProducts();
 
-  //  check data
-
-  dispatch(productsActions.setProducts(products));
+    dispatch(productsActions.setProducts(products));
+  } catch {
+    console.error('Не удалось получить список товаров.');
+  }
 };
