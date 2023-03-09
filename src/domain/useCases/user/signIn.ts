@@ -1,4 +1,4 @@
-import { User } from '../entities';
+import { User } from '../../entities';
 
 export interface SignInService {
   signIn: (email: Email, password: Password) => Promise<User>;

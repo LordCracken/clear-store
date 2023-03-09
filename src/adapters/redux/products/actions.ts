@@ -1,7 +1,7 @@
 import { Dispatch } from '@reduxjs/toolkit';
 import { productsActions } from './slice';
 import { ProductsService } from '../../gateways';
-import { GetProductsCase } from '../../../domain/useCases/getProducts';
+import { GetProductsCase } from '../../../domain/useCases';
 
 export const fetchProductsData = () => async (dispatch: Dispatch) => {
   try {

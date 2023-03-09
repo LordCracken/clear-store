@@ -1,4 +1,4 @@
-import { Cart, Order, User } from '../entities';
+import { Cart, Order, User } from '../../entities';
 
 export type CreateOrderService = (user: User, cart: Cart) => Promise<Order>;
 

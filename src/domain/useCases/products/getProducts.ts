@@ -1,4 +1,4 @@
-import { Product } from '../entities';
+import { Product } from '../../entities';
 
 export interface GetProductsService {
   getProducts: () => Promise<Product[]>;
