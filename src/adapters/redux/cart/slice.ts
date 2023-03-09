@@ -15,9 +15,6 @@ const Slice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    empty() {
-      return initialState;
-    },
     openCart(state) {
       state.isOpen = true;
     },
