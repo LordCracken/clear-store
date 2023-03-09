@@ -1,5 +1,7 @@
+import { CartData } from '../../entities/DTO';
+
 export interface AddToCartService {
-  add: (id: UniqueID) => Promise<void>;
+  add: (id: UniqueID, cart: CartData) => Promise<CartData>;
 }
 
 export class AddToCartCase {
@@ -9,7 +11,7 @@ export class AddToCartCase {
     this.addToCartService = service;
   }
 
-  async addToCart(id: UniqueID) {
-    await this.addToCartService.add(id);
+  async addToCart(id: UniqueID, cart: CartData) {
+    await this.addToCartService.add(id, cart);
   }
 }

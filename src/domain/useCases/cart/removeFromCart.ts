@@ -1,5 +1,7 @@
+import { CartData } from '../../entities/DTO';
+
 export interface RemoveFromCartService {
-  remove: (id: UniqueID) => Promise<void>;
+  remove: (id: UniqueID, cart: CartData) => Promise<CartData>;
 }
 
 export class RemoveFromCartCase {
@@ -9,7 +11,7 @@ export class RemoveFromCartCase {
     this.removeFromCartService = service;
   }
 
-  async removeFromCart(id: UniqueID) {
-    await this.removeFromCartService.remove(id);
+  async removeFromCart(id: UniqueID, cart: CartData) {
+    await this.removeFromCartService.remove(id, cart);
   }
 }
