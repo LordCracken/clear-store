@@ -1,7 +1,13 @@
+import { Service } from './';
 import { GetProductsService } from '../../domain/useCases';
 
-export class ProductsService implements GetProductsService {
-  private url = 'https://clean-store-e7a58-default-rtdb.europe-west1.firebasedatabase.app/products';
+export class ProductsService extends Service implements GetProductsService {
+  private readonly url: string;
+
+  constructor() {
+    super();
+    this.url = `${this.baseUrl}/products.json`;
+  }
 
   async getProducts() {
     const response = await fetch(this.url);
