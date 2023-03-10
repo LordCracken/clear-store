@@ -12,6 +12,6 @@ export class RemoveFromCartCase {
   }
 
   async removeFromCart(id: UniqueID, cart: CartData) {
-    await this.removeFromCartService.remove(id, cart);
+    return this.removeFromCartService.remove(id, cart);
   }
 }

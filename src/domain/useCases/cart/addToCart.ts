@@ -12,6 +12,6 @@ export class AddToCartCase {
   }
 
   async addToCart(id: UniqueID, cart: CartData) {
-    await this.addToCartService.add(id, cart);
+    return this.addToCartService.add(id, cart);
   }
 }

@@ -32,8 +32,9 @@ export class CartService
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(new CartData(cart)),
     });
+    const newCart = await response.json();
 
-    return response.json();
+    return newCart.products;
   }
 
   async remove(id: UniqueID, cartData: CartData) {
@@ -45,8 +46,9 @@ export class CartService
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(new CartData(cart)),
     });
+    const newCart = await response.json();
 
-    return response.json();
+    return newCart.products;
   }
 
   async empty() {
