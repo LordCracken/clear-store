@@ -1,5 +1,4 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCPk9eSuA26tsyqIVeQvNUO2dr7F1i6trE',
@@ -12,21 +11,7 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-export abstract class Service {
-  protected baseUrl = 'https://clean-store-e7a58-default-rtdb.europe-west1.firebasedatabase.app/';
-}
-
-export abstract class AuthService extends Service {
-  protected auth = getAuth();
-  protected uid = '';
-
-  protected constructor() {
-    super();
-    onAuthStateChanged(this.auth, user => {
-      if (user) this.uid = user.uid;
-    });
-  }
-}
-
-export * from './auth';
+export * from './blueprints/service';
+export * from './blueprints/authService';
+export * from './user';
 export * from './products';
