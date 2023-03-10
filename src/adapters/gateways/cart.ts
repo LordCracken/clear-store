@@ -27,6 +27,10 @@ export class CartService
     const cart = new Cart(cartData.products);
     cart.addProduct(id);
 
+    if (!this.auth.currentUser) {
+      return new CartData(cart);
+    }
+
     const response = await fetch(this.url, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -40,6 +44,10 @@ export class CartService
   async remove(id: UniqueID, cartData: CartData) {
     const cart = new Cart(cartData.products);
     cart.removeProduct(id);
+
+    if (!this.auth.currentUser) {
+      return new CartData(cart);
+    }
 
     const response = await fetch(this.url, {
       method: 'PUT',
