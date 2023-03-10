@@ -1,7 +1,11 @@
 import { Product } from '../../entities';
 
+export interface ServerProducts {
+  [key: string]: Omit<Product, 'id' | 'description'>;
+}
+
 export interface GetProductsService {
-  getProducts: () => Promise<Product[]>;
+  getProducts: () => Promise<ServerProducts>;
 }
 
 export class GetProductsCase {
