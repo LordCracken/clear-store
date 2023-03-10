@@ -4,9 +4,10 @@ import { useSelector } from 'react-redux';
 import { Box, IconButton, ListItem, Typography } from '@mui/material';
 import { Add, Remove } from '@mui/icons-material';
 // Store
-import { useAppDispatch } from '../../../adapters/redux';
-import { cartActions } from '../../../adapters/redux/cart';
 import { selectProductItem } from '../../../adapters/redux/products';
+// shared
+import { useAppDispatch } from '../../hooks';
+import { addItem, removeItem } from '../../../adapters/redux/cart/actions';
 
 interface ICartItem {
   id: string;
@@ -19,11 +20,11 @@ const CartItem: FC<ICartItem> = ({ id, quantity }) => {
   const { name, author, price } = product;
 
   const addItemHandler = () => {
-    dispatch(cartActions.addProduct(product));
+    dispatch(addItem(id, price));
   };
 
   const removeItemHandler = () => {
-    dispatch(cartActions.removeProduct(product.id));
+    dispatch(removeItem(id, price));
   };
 
   return (

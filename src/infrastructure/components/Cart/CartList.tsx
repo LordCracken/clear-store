@@ -23,7 +23,7 @@ const CartList = () => {
       return;
     }
 
-    dispatch(cartActions.empty());
+    dispatch(cartActions.reset());
   };
 
   return (
