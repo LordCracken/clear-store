@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { CartData } from '../../../domain/entities/DTO';
 
 interface ICart extends CartData {
+  totalPrice: number;
   isOpen: boolean;
 }
 
@@ -15,6 +16,11 @@ const Slice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    setCart(state, action) {
+      state.products = action.payload.products;
+      state.totalPrice = action.payload.totalPrice;
+    },
+    reset: () => initialState,
     openCart(state) {
       state.isOpen = true;
     },
