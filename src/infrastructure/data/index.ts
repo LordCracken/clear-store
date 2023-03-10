@@ -2,7 +2,7 @@ import { User } from '../../domain/entities';
 
 const database = {
   orders: [],
-  users: [new User('Владислав', 'Якимовский', { products: [], totalPrice: 0 }, [])],
+  users: [new User('Владислав', 'Якимовский', { products: [] }, [])],
   products: [
     {
       id: 'js01',
