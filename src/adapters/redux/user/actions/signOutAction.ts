@@ -1,13 +1,13 @@
 import { Dispatch } from '@reduxjs/toolkit';
 import { userActions } from '../slice';
-import { AuthService } from '../../../gateways';
+import { UserService } from '../../../gateways';
 import { SignOutCase } from '../../../../domain/useCases';
 
 export const signOutAction = () => async (dispatch: Dispatch) => {
   dispatch(userActions.updateStatus({ status: 'loading', message: 'Загрузка...' }));
 
   try {
-    const service = new AuthService();
+    const service = new UserService();
     const useCase = new SignOutCase(service);
     await useCase.signOut();
 

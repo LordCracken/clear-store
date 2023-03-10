@@ -1,14 +1,14 @@
 import { Dispatch } from '@reduxjs/toolkit';
 import { AuthErrorCodes } from 'firebase/auth';
 import { userActions } from '../slice';
-import { AuthService } from '../../../gateways';
+import { UserService } from '../../../gateways';
 import { SignUpCase } from '../../../../domain/useCases';
 
 export const signUpAction = (email: Email, password: Password) => async (dispatch: Dispatch) => {
   dispatch(userActions.updateStatus({ status: 'loading', message: 'Загрузка...' }));
 
   try {
-    const service = new AuthService();
+    const service = new UserService();
     const useCase = new SignUpCase(service);
     const user = await useCase.signUp(email, password);
 
