@@ -10,7 +10,7 @@ import AuthPage from './pages/AuthPage';
 import ProductsPage from './pages/ProductsPage';
 import ProfilePage from './pages/ProfilePage';
 import Cart from './components/Cart/Cart';
-import { useAppDispatch, useAppSelector } from './hooks';
+import { useAppDispatch } from './hooks';
 import { autologin, selectIsAuth } from '../adapters/redux/user';
 import { getCart } from '../adapters/redux/cart/actions';
 import { selectIsProductsLoaded } from '../adapters/redux/products';
@@ -18,7 +18,7 @@ import { selectIsProductsLoaded } from '../adapters/redux/products';
 const App = () => {
   const auth = getAuth();
   const dispatch = useAppDispatch();
-  const isAuth = useAppSelector(selectIsAuth);
+  const isAuth = useSelector(selectIsAuth);
   const isProductsLoaded = useSelector(selectIsProductsLoaded);
 
   useEffect(() => {
