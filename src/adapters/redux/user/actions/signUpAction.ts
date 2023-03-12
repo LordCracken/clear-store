@@ -10,9 +10,9 @@ export const signUpAction = (email: Email, password: Password) => async (dispatc
   try {
     const service = new UserService();
     const useCase = new SignUpCase(service);
-    const user = await useCase.signUp(email, password);
+    const { firstName, lastName } = await useCase.signUp(email, password);
 
-    dispatch(userActions.signIn(user));
+    dispatch(userActions.signIn({ firstName, lastName }));
     dispatch(userActions.updateStatus({ status: 'success', message: 'Добро пожаловать!' }));
   } catch (error) {
     switch ((error as AuthError).code) {

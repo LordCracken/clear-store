@@ -12,6 +12,7 @@ export const signOutAction = () => async (dispatch: Dispatch) => {
     await useCase.signOut();
 
     dispatch(userActions.signOut());
+    sessionStorage.removeItem('cart');
     dispatch(userActions.updateStatus({ status: 'success', message: 'До встречи!' }));
   } catch (error) {
     if (error instanceof Error) {

@@ -6,13 +6,13 @@ import { SignInCase } from '../../../../domain/useCases';
 
 export const signInAction = (email: Email, password: Password) => async (dispatch: Dispatch) => {
   dispatch(userActions.updateStatus({ status: 'loading', message: 'Загрузка...' }));
+  const service = new UserService();
+  const useCase = new SignInCase(service);
 
   try {
-    const service = new UserService();
-    const useCase = new SignInCase(service);
-    const user = await useCase.signIn(email, password);
-
-    dispatch(userActions.signIn(user));
+    const { firstName, lastName } = await useCase.signIn(email, password);
+    dispatch(userActions.signIn({ firstName, lastName }));
+    sessionStorage.removeItem('cart');
     dispatch(userActions.updateStatus({ status: 'success', message: 'С возвращением!' }));
   } catch (error) {
     switch ((error as AuthError).code) {
