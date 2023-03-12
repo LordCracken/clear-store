@@ -13,7 +13,9 @@ export class Cart implements ICart {
   products: Products = new Map();
 
   constructor(products: CartItem[]) {
-    products.forEach(({ id, quantity }) => this.products.set(id, quantity));
+    if (products) {
+      products.forEach(({ id, quantity }) => this.products.set(id, quantity));
+    }
   }
 
   addProduct(id: UniqueID) {

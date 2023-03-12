@@ -5,14 +5,14 @@ import { cartActions } from '../slice';
 
 export const removeItem =
   (id: UniqueID, price: number) => async (dispatch: Dispatch, getState: () => RootState) => {
-    const service = new CartService();
-    const useCase = new RemoveFromCartCase(service);
-
     const state = getState();
     const { products, totalPrice } = state.cart;
 
+    const service = new CartService();
+    const useCase = new RemoveFromCartCase(service);
+
     try {
-      const cart = await useCase.removeFromCart(id, { products });
+      const cart = await useCase.removeFromCart(id, products);
       dispatch(cartActions.setCart({ products: cart.products, totalPrice: totalPrice - price }));
       sessionStorage.setItem('cart', JSON.stringify(cart));
     } catch {

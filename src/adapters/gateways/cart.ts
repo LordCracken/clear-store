@@ -1,5 +1,5 @@
 import { AuthService } from './';
-import { Cart } from '../../domain/entities';
+import { Cart, CartItem } from '../../domain/entities';
 import {
   AddToCartService,
   EmptyCartService,
@@ -12,51 +12,46 @@ export class CartService
   extends AuthService
   implements GetCartService, AddToCartService, RemoveFromCartService, EmptyCartService
 {
-  private readonly url = `${this.baseUrl}/${this.uid}/cart.json`;
+  url: string;
 
   constructor() {
     super();
+    this.url = `${this.usersUrl}/${this.uid}/cart.json`;
   }
 
   async get() {
     const response = await fetch(this.url);
+    const data = await response.json();
+    const cart = new Cart(data?.products ?? []);
+    return new CartData(cart);
+  }
+
+  private async sendNewCart(cart: Cart) {
+    if (!this.uid) {
+      return new CartData(cart);
+    }
+
+    const response = await fetch(this.url, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(new CartData(cart)),
+    });
+
     return response.json();
   }
 
-  async add(id: UniqueID, cartData: CartData) {
-    const cart = new Cart(cartData.products);
+  async add(id: UniqueID, products: CartItem[]) {
+    const cart = new Cart(products);
     cart.addProduct(id);
 
-    if (!this.auth.currentUser) {
-      return new CartData(cart);
-    }
-
-    const response = await fetch(this.url, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(new CartData(cart)),
-    });
-    const newCart = await response.json();
-
-    return newCart.products;
+    return this.sendNewCart(cart);
   }
 
-  async remove(id: UniqueID, cartData: CartData) {
-    const cart = new Cart(cartData.products);
+  async remove(id: UniqueID, products: CartItem[]) {
+    const cart = new Cart(products);
     cart.removeProduct(id);
 
-    if (!this.auth.currentUser) {
-      return new CartData(cart);
-    }
-
-    const response = await fetch(this.url, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(new CartData(cart)),
-    });
-    const newCart = await response.json();
-
-    return newCart.products;
+    return this.sendNewCart(cart);
   }
 
   async empty() {
