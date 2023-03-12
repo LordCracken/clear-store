@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 // MUI
@@ -12,11 +13,13 @@ import Cart from './components/Cart/Cart';
 import { useAppDispatch, useAppSelector } from './hooks';
 import { autologin, selectIsAuth } from '../adapters/redux/user';
 import { getCart } from '../adapters/redux/cart/actions';
+import { selectIsProductsLoaded } from '../adapters/redux/products';
 
 const App = () => {
   const auth = getAuth();
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(selectIsAuth);
+  const isProductsLoaded = useSelector(selectIsProductsLoaded);
 
   useEffect(() => {
     return onAuthStateChanged(auth, user => {
@@ -26,7 +29,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getCart());
-  }, [isAuth]);
+  }, [isAuth, isProductsLoaded]);
 
   return (
     <>
