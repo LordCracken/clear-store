@@ -25,7 +25,7 @@ export class UserService
   private async getUserData(uid?: UniqueID) {
     const res = await fetch(`${this.usersUrl}/${uid ?? this.uid}.json`);
     const { firstName, lastName } = await res.json();
-    return new User(firstName, lastName );
+    return new User(firstName, lastName);
   }
 
   async autologin() {
