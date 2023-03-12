@@ -1,4 +1,4 @@
 export * from './autologin';
-export * from './signUpAction';
-export * from './signInAction';
-export * from './signOutAction';
+export * from './signUp';
+export * from './signIn';
+export * from './signOut';
