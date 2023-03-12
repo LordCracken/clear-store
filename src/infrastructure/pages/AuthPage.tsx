@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // MUI
-import { Alert, AlertTitle, Box, Button, Grid, Snackbar, TextField } from '@mui/material';
+import { Alert, AlertTitle, Box, Button, Grid, Snackbar, Stack, TextField } from '@mui/material';
 // Store
-import { signInAction } from '../../adapters/redux/user';
+import { signInAction, signUpAction } from '../../adapters/redux/user';
 // Shared
 import { useAppDispatch, useAppSelector, useInput } from '../hooks';
 
@@ -36,7 +36,7 @@ const AuthPage = () => {
     }
   }, [isAuthenticated]);
 
-  const signInHandler = () => {
+  const signInHandler = (signUp = false) => {
     setEmailIsTouched();
     setPasswordIsTouched();
 
@@ -44,7 +44,10 @@ const AuthPage = () => {
       return;
     }
 
-    dispatch(signInAction(email, password));
+    if (!emailError && !passwordError) {
+      const action = signUp ? signUpAction(email, password) : signInAction(email, password);
+      dispatch(action);
+    }
 
     if (status === 'error') {
       setSnackIsOpen(true);
@@ -72,7 +75,7 @@ const AuthPage = () => {
           justifyContent="center"
           alignItems="center"
           spacing={2}
-          sx={{ maxWidth: 250, '.MuiGrid-item': { width: '100%' } }}
+          sx={{ maxWidth: 300, '.MuiGrid-item': { width: '100%' } }}
         >
           <Grid item>
             <TextField
@@ -99,9 +102,14 @@ const AuthPage = () => {
             />
           </Grid>
           <Grid item>
-            <Button variant="contained" size="large" sx={{ width: '100%' }} onClick={signInHandler}>
-              Войти
-            </Button>
+            <Stack spacing={{ sm: 2, xs: 1 }} direction={{ xs: 'column', sm: 'row' }}>
+              <Button variant="outlined" fullWidth onClick={() => signInHandler(true)}>
+                Регистрация
+              </Button>
+              <Button variant="contained" fullWidth onClick={() => signInHandler()}>
+                Войти
+              </Button>
+            </Stack>
           </Grid>
         </Grid>
       </Box>
