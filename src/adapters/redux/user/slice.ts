@@ -1,17 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CartData, OrderData } from '../../../domain/entities/DTO';
+import { User } from '../../../domain/entities';
 
-interface IUser {
+interface IUser extends User {
   isAuthenticated: boolean;
-  firstName: string;
-  lastName: string;
-  cart?: CartData;
-  orders?: OrderData[];
   status?: Statuses;
   statusMsg?: string;
 }
 
-const initialState: IUser = { isAuthenticated: false, firstName: '', lastName: '' };
+const initialState: IUser = {
+  isAuthenticated: false,
+  firstName: '',
+  lastName: '',
+  cart: { products: [] },
+  orders: [],
+};
 
 const userSlice = createSlice({
   name: 'user',

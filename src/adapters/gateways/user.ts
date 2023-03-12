@@ -2,35 +2,51 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } f
 
 import { AuthService } from './';
 import { User } from '../../domain/entities';
-import { SignInService, SignOutService, SignUpService } from '../../domain/useCases';
+import {
+  AutologinService,
+  SignInService,
+  SignOutService,
+  SignUpService,
+} from '../../domain/useCases';
 
 export class UserService
   extends AuthService
-  implements SignUpService, SignInService, SignOutService
+  implements AutologinService, SignUpService, SignInService, SignOutService
 {
-  private cartUrl = `${this.baseUrl}/${this.uid}/cart.json`;
-  private ordersUrl = `${this.baseUrl}/${this.uid}/orders.json`;
+  private cartUrl = '';
+  private ordersUrl = '';
 
   constructor() {
     super();
+    this.cartUrl = `${this.usersUrl}/${this.uid}/cart.json`;
+    this.ordersUrl = `${this.usersUrl}/${this.uid}/orders.json`;
+  }
+
+  private async getUserData(uid?: UniqueID) {
+    const res = await fetch(`${this.usersUrl}/${uid ?? this.uid}.json`);
+    const { firstName, lastName, cart, orders } = await res.json();
+    return new User(firstName, lastName, cart, orders);
+  }
+
+  async autologin() {
+    return this.getUserData();
   }
 
   async signUp(email: Email, password: Password) {
-    await createUserWithEmailAndPassword(this.auth, email, password);
+    const res = await createUserWithEmailAndPassword(this.auth, email, password);
 
-    const cart = await fetch(this.cartUrl).then(res => res.json());
-    const orders = await fetch(this.ordersUrl).then(res => res.json());
+    await fetch(`${this.usersUrl}/${res.user.uid}.json`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ firstName: 'Tester', lastName: 'Test' }),
+    });
 
-    return new User('', '', cart, orders);
+    return new User('Tester', 'Test', { products: [] }, []);
   }
 
   async signIn(email: Email, password: Password) {
-    await signInWithEmailAndPassword(this.auth, email, password);
-
-    const cart = await fetch(this.cartUrl).then(res => res.json());
-    const orders = await fetch(this.ordersUrl).then(res => res.json());
-
-    return new User('', '', cart, orders);
+    const res = await signInWithEmailAndPassword(this.auth, email, password);
+    return this.getUserData(res.user.uid);
   }
 
   async signOut() {
