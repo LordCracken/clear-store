@@ -11,8 +11,6 @@ const initialState: IUser = {
   isAuthenticated: false,
   firstName: '',
   lastName: '',
-  cart: { products: [] },
-  orders: [],
 };
 
 const userSlice = createSlice({
