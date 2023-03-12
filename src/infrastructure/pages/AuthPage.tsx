@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 // MUI
-import { Alert, AlertTitle, Box, Button, Grid, Snackbar, Stack, TextField } from '@mui/material';
+import { Box, Button, Grid, Stack, TextField } from '@mui/material';
 // Store
-import { signInAction, signUpAction } from '../../adapters/redux/user';
+import { signInAction, signUpAction, userActions } from '../../adapters/redux/user';
 // Shared
 import { useAppDispatch, useAppSelector, useInput } from '../hooks';
+import { Status } from '../components/Status';
 
 const AuthPage = () => {
   const dispatch = useAppDispatch();
   const { isAuthenticated, status, statusMsg } = useAppSelector(state => state.user);
-  const [snackIsOpen, setSnackIsOpen] = useState(false);
   const navigate = useNavigate();
 
   const emailRule = (value: Email) => value.length !== 0;
@@ -34,6 +34,7 @@ const AuthPage = () => {
     if (isAuthenticated) {
       navigate('/');
     }
+    dispatch(userActions.updateStatus({ status: '', statusMsg: '' }));
   }, [isAuthenticated]);
 
   const signInHandler = (signUp = false) => {
@@ -48,14 +49,6 @@ const AuthPage = () => {
       const action = signUp ? signUpAction(email, password) : signInAction(email, password);
       dispatch(action);
     }
-
-    if (status === 'error') {
-      setSnackIsOpen(true);
-    }
-  };
-
-  const closeSnackHandler = () => {
-    setSnackIsOpen(false);
   };
 
   return (
@@ -113,17 +106,13 @@ const AuthPage = () => {
           </Grid>
         </Grid>
       </Box>
-      <Snackbar
-        open={snackIsOpen}
-        autoHideDuration={5000}
-        onClose={closeSnackHandler}
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-      >
-        <Alert severity="error" onClose={closeSnackHandler}>
-          <AlertTitle>Ошибка!</AlertTitle>
-          {statusMsg}
-        </Alert>
-      </Snackbar>
+      {!!status && !!statusMsg && (
+        <Status
+          status={status}
+          message={statusMsg}
+          position={{ vertical: 'top', horizontal: 'center' }}
+        />
+      )}
     </>
   );
 };
