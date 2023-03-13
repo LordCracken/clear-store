@@ -1,5 +1,4 @@
-import { useSelector } from 'react-redux';
-// MUI
+import { observer } from 'mobx-react-lite'; // MUI
 import { AppBar, Badge, Container, IconButton, Toolbar } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
 // Components
@@ -7,18 +6,13 @@ import Logo from '../Logo';
 import UserMenu from './UserMenu';
 import SignInButton from './SignInButton';
 // Store
-import { cartActions, selectCartProducts } from '../../../adapters/redux/cart';
-import { selectIsAuth } from '../../../adapters/redux/user';
-// shared
-import { useAppDispatch } from '../../hooks';
+import { CartInstance } from '../../../adapters/presenter';
 
 const Header = () => {
-  const dispatch = useAppDispatch();
-  const cartLength = useSelector(selectCartProducts).length;
-  const isAuth = useSelector(selectIsAuth);
+  const { isAuthenticated, cartProducts, setIsOpen } = CartInstance;
 
   const openCart = () => {
-    dispatch(cartActions.openCart());
+    setIsOpen(true);
   };
 
   return (
@@ -26,9 +20,9 @@ const Header = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Logo />
-          {isAuth ? <UserMenu /> : <SignInButton />}
+          {isAuthenticated ? <UserMenu /> : <SignInButton />}
           <IconButton color="inherit" onClick={openCart} sx={{ ml: '10px' }}>
-            <Badge color="secondary" badgeContent={cartLength}>
+            <Badge color="secondary" badgeContent={cartProducts.length}>
               <ShoppingCart />
             </Badge>
           </IconButton>
@@ -38,4 +32,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default observer(Header);

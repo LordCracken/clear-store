@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { observer } from 'mobx-react-lite';
 import { Route, Routes } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 // MUI
@@ -12,14 +13,14 @@ import ProfilePage from './pages/ProfilePage';
 import Cart from './components/Cart/Cart';
 import { useAppDispatch } from './hooks';
 import { autologin, selectIsAuth } from '../adapters/redux/user';
-import { getCart } from '../adapters/redux/cart/actions';
-import { selectIsProductsLoaded } from '../adapters/redux/products';
+import { CartInstance, ProductsInstance } from '../adapters/presenter';
 
 const App = () => {
   const auth = getAuth();
   const dispatch = useAppDispatch();
   const isAuth = useSelector(selectIsAuth);
-  const isProductsLoaded = useSelector(selectIsProductsLoaded);
+  const products = ProductsInstance.products;
+  const { getCart } = CartInstance;
 
   useEffect(() => {
     return onAuthStateChanged(auth, user => {
@@ -28,8 +29,8 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getCart());
-  }, [isAuth, isProductsLoaded]);
+    getCart(products);
+  }, [isAuth, products]);
 
   return (
     <>
@@ -46,4 +47,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default observer(App);

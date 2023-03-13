@@ -1,21 +1,17 @@
-import { useSelector } from 'react-redux';
+import { observer } from 'mobx-react-lite';
 // MUI
 import { Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
 // Components
 import CartList from './CartList';
 // Store
-import { cartActions, selectCartIsOpen, selectCartProducts } from '../../../adapters/redux/cart';
-// shared
-import { useAppDispatch } from '../../hooks';
+import { CartInstance } from '../../../adapters/presenter';
 
 const Cart = () => {
-  const dispatch = useAppDispatch();
-  const products = useSelector(selectCartProducts);
-  const isOpen = useSelector(selectCartIsOpen);
+  const { cartProducts, isOpen, setIsOpen } = CartInstance;
 
   const closeCart = () => {
-    dispatch(cartActions.closeCart());
+    setIsOpen(false);
   };
 
   const hasOrder = <CartList />;
@@ -31,10 +27,10 @@ const Cart = () => {
           <ListItemText primary={'Корзина'} />
         </ListItem>
         <Divider />
-        {!products.length ? hasNoOrder : hasOrder}
+        {!cartProducts.length ? hasNoOrder : hasOrder}
       </List>
     </Drawer>
   );
 };
 
-export default Cart;
+export default observer(Cart);

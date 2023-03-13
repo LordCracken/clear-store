@@ -1,13 +1,10 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
+import { observer } from 'mobx-react-lite';
 // MUI
 import { Box, IconButton, ListItem, Typography } from '@mui/material';
 import { Add, Remove } from '@mui/icons-material';
 // Store
-import { selectProductItem } from '../../../adapters/redux/products';
-// shared
-import { useAppDispatch } from '../../hooks';
-import { addItem, removeItem } from '../../../adapters/redux/cart/actions';
+import { CartInstance, ProductsInstance } from '../../../adapters/presenter';
 
 interface ICartItem {
   id: string;
@@ -15,16 +12,16 @@ interface ICartItem {
 }
 
 const CartItem: FC<ICartItem> = ({ id, quantity }) => {
-  const dispatch = useAppDispatch();
-  const product = useSelector(selectProductItem(id))!;
+  const { addItem, removeItem } = CartInstance;
+  const product = ProductsInstance.getProduct(id)!;
   const { name, author, price } = product;
 
   const addItemHandler = () => {
-    dispatch(addItem(id, price));
+    addItem(id, price);
   };
 
   const removeItemHandler = () => {
-    dispatch(removeItem(id, price));
+    removeItem(id, price);
   };
 
   return (
@@ -32,7 +29,7 @@ const CartItem: FC<ICartItem> = ({ id, quantity }) => {
       <Typography variant="body1">
         {name}, {author} {price}руб.
       </Typography>
-      <Box sx={{}}>
+      <Box>
         <IconButton onClick={addItemHandler}>
           <Add />
         </IconButton>
@@ -47,4 +44,4 @@ const CartItem: FC<ICartItem> = ({ id, quantity }) => {
   );
 };
 
-export default CartItem;
+export default observer(CartItem);
