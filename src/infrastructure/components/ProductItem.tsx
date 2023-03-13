@@ -1,10 +1,9 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 // MUI
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 // Store
+import { ProductsInstance } from '../../adapters/presenter';
 import { useAppDispatch } from '../hooks';
-import { selectProductItem } from '../../adapters/redux/products';
 // Interfaces
 import { Product } from '../../domain/entities';
 import { addItem } from '../../adapters/redux/cart/actions';
@@ -13,7 +12,7 @@ type IProductItem = Omit<Product, 'description' | 'tags'>;
 
 const ProductItem: FC<IProductItem> = ({ id }) => {
   const dispatch = useAppDispatch();
-  const product = useSelector(selectProductItem(id));
+  const product = ProductsInstance.getProduct(id);
 
   if (!product) {
     return null;

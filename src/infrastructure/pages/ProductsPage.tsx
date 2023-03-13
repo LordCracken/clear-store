@@ -1,21 +1,20 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { observer } from 'mobx-react-lite';
 // MUI
 import { Grid } from '@mui/material';
 // Components
 import ProductItem from '../components/ProductItem';
 // Store
-import { fetchProductsData, selectProducts } from '../../adapters/redux/products';
-// shared
-import { useAppDispatch } from '../hooks';
+import { ProductsInstance } from '../../adapters/presenter';
 
 const ProductsPage = () => {
-  const products = useSelector(selectProducts);
-  const dispatch = useAppDispatch();
+  const products = ProductsInstance.products;
 
   useEffect(() => {
     if (!products.length) {
-      dispatch(fetchProductsData());
+      (async () => {
+        await ProductsInstance.fetchProductsData();
+      })();
     }
   }, []);
 
@@ -35,4 +34,4 @@ const ProductsPage = () => {
   );
 };
 
-export default ProductsPage;
+export default observer(ProductsPage);
