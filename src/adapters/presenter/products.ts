@@ -14,7 +14,7 @@ class ProductsStore {
     this.products = products;
   };
 
-  async fetchProductsData() {
+  fetchProductsData = async () => {
     const service = new ProductsService();
     const useCase = new GetProductsCase(service);
 
@@ -35,11 +35,11 @@ class ProductsStore {
     } catch {
       console.error('Не удалось получить список товаров.');
     }
-  }
+  };
 
   getProduct(id: UniqueID) {
     return this.products.find(item => item.id === id);
   }
 }
 
-export const ProductsInstance = new ProductsStore();
+export default ProductsStore;
