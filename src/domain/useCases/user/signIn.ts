@@ -5,7 +5,7 @@ export interface SignInService {
 }
 
 export class SignInCase {
-  signInService: SignInService;
+  private signInService: SignInService;
 
   constructor(service: SignInService) {
     this.signInService = service;

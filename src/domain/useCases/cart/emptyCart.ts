@@ -3,7 +3,7 @@ export interface EmptyCartService {
 }
 
 export class EmptyCartCase {
-  emptyCartService: EmptyCartService;
+  private emptyCartService: EmptyCartService;
 
   constructor(service: EmptyCartService) {
     this.emptyCartService = service;

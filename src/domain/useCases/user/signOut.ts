@@ -3,7 +3,7 @@ export interface SignOutService {
 }
 
 export class SignOutCase {
-  signOutService: SignOutService;
+  private signOutService: SignOutService;
 
   constructor(service: SignOutService) {
     this.signOutService = service;

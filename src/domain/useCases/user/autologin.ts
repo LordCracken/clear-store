@@ -5,7 +5,7 @@ export interface AutologinService {
 }
 
 export class AutologinCase {
-  autologinService: AutologinService;
+  private autologinService: AutologinService;
 
   constructor(service: AutologinService) {
     this.autologinService = service;

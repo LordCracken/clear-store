@@ -6,7 +6,7 @@ export interface RemoveFromCartService {
 }
 
 export class RemoveFromCartCase {
-  removeFromCartService: RemoveFromCartService;
+  private removeFromCartService: RemoveFromCartService;
 
   constructor(service: RemoveFromCartService) {
     this.removeFromCartService = service;

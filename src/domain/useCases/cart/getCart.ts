@@ -5,7 +5,7 @@ export interface GetCartService {
 }
 
 export class GetCartCase {
-  getCartService: GetCartService;
+  private getCartService: GetCartService;
 
   constructor(service: GetCartService) {
     this.getCartService = service;

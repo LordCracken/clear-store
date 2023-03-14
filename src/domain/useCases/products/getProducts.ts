@@ -9,7 +9,7 @@ export interface GetProductsService {
 }
 
 export class GetProductsCase {
-  getProductsService: GetProductsService;
+  private getProductsService: GetProductsService;
 
   constructor(service: GetProductsService) {
     this.getProductsService = service;

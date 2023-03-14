@@ -6,7 +6,7 @@ export interface AddToCartService {
 }
 
 export class AddToCartCase {
-  addToCartService: AddToCartService;
+  private addToCartService: AddToCartService;
 
   constructor(service: AddToCartService) {
     this.addToCartService = service;
