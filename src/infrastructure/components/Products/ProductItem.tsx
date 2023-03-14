@@ -1,19 +1,16 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 // MUI
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 // Store
-import { useAppDispatch } from '../hooks';
-import { selectProductItem } from '../../adapters/redux/products';
+import { CartInstance, ProductsInstance } from '../../../adapters/presenter';
 // Interfaces
-import { Product } from '../../domain/entities';
-import { addItem } from '../../adapters/redux/cart/actions';
+import { Product } from '../../../domain/entities';
 
 type IProductItem = Omit<Product, 'description' | 'tags'>;
 
 const ProductItem: FC<IProductItem> = ({ id }) => {
-  const dispatch = useAppDispatch();
-  const product = useSelector(selectProductItem(id));
+  const { addItem } = CartInstance;
+  const product = ProductsInstance.getProduct(id);
 
   if (!product) {
     return null;
@@ -22,7 +19,7 @@ const ProductItem: FC<IProductItem> = ({ id }) => {
   const { name, image, author, price } = product;
 
   const addToCartHandler = () => {
-    dispatch(addItem(id, price));
+    addItem(id, price);
   };
 
   return (

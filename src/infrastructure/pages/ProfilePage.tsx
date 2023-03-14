@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 // MUI
 import { Card, CardContent, Typography } from '@mui/material';
-// shared
-import { useAppSelector } from '../hooks';
+// Store
+import { UserInstance } from '../../adapters/presenter';
 
 const ProfilePage = () => {
-  const { isAuthenticated, firstName, lastName } = useAppSelector(state => state.user);
+  const { isAuthenticated, firstName, lastName } = UserInstance;
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -36,8 +36,10 @@ export class CartService
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(new CartData(cart)),
     });
+    const data = await response.json();
+    const updatedCart = new Cart(data?.products ?? []);
 
-    return response.json();
+    return new CartData(updatedCart);
   }
 
   async add(id: UniqueID, products: CartItem[]) {

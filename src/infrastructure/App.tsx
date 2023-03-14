@@ -1,40 +1,39 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { observer } from 'mobx-react-lite';
 import { Route, Routes } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 // MUI
 import { Container } from '@mui/material';
+// Store
+import { CartInstance, ProductsInstance, UserInstance } from '../adapters/presenter';
 // Components
 import Header from './components/Header/Header';
 import AuthPage from './pages/AuthPage';
 import ProductsPage from './pages/ProductsPage';
 import ProfilePage from './pages/ProfilePage';
 import Cart from './components/Cart/Cart';
-import { useAppDispatch } from './hooks';
-import { autologin, selectIsAuth } from '../adapters/redux/user';
-import { getCart } from '../adapters/redux/cart/actions';
-import { selectIsProductsLoaded } from '../adapters/redux/products';
+import Statuses from './components/Statuses';
 
 const App = () => {
   const auth = getAuth();
-  const dispatch = useAppDispatch();
-  const isAuth = useSelector(selectIsAuth);
-  const isProductsLoaded = useSelector(selectIsProductsLoaded);
+  const { isAuthenticated } = UserInstance;
+  const { products } = ProductsInstance;
+  const { getCart } = CartInstance;
 
   useEffect(() => {
     return onAuthStateChanged(auth, user => {
-      if (user) dispatch(autologin());
+      if (user) UserInstance.autologin();
     })();
   }, []);
 
   useEffect(() => {
-    dispatch(getCart());
-  }, [isAuth, isProductsLoaded]);
+    getCart(products);
+  }, [isAuthenticated, products]);
 
   return (
     <>
       <Header />
-      <Container sx={{ mt: '100px' }}>
+      <Container sx={{ mt: { md: '100px', xs: '50px' } }}>
         <Routes>
           <Route path="/" element={<ProductsPage />} />
           <Route path="/auth" element={<AuthPage />} />
@@ -42,8 +41,9 @@ const App = () => {
         </Routes>
       </Container>
       <Cart />
+      <Statuses />
     </>
   );
 };
 
-export default App;
+export default observer(App);

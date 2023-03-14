@@ -1,34 +1,29 @@
-import { useSelector } from 'react-redux';
+import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 // MUI
 import { Button, Divider, ListItem, Typography } from '@mui/material';
 // Components
 import CartItem from './CartItem';
 // Store
-import { cartActions } from '../../../adapters/redux/cart';
-import { selectIsAuth } from '../../../adapters/redux/user';
-// shared
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { CartInstance } from '../../../adapters/presenter';
 
 const CartList = () => {
-  const dispatch = useAppDispatch();
-  const { products, totalPrice } = useAppSelector(state => state.cart);
-  const isAuth = useSelector(selectIsAuth);
+  const { getIsAuth, cartProducts, totalPrice, setIsOpen, reset } = CartInstance;
   const navigate = useNavigate();
 
   const createOrderHandler = () => {
-    if (!isAuth) {
+    if (!getIsAuth()) {
       navigate('/auth');
-      dispatch(cartActions.closeCart());
+      setIsOpen(false);
       return;
     }
 
-    dispatch(cartActions.reset());
+    reset();
   };
 
   return (
     <>
-      {products.map(item => (
+      {cartProducts.map(item => (
         <CartItem key={item.id} {...item} />
       ))}
       <Divider />
@@ -44,4 +39,4 @@ const CartList = () => {
   );
 };
 
-export default CartList;
+export default observer(CartList);

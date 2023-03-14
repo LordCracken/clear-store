@@ -4,13 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { Box, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
 // Store
-import { signOutAction } from '../../../adapters/redux/user';
-// shared
-import { useAppDispatch } from '../../hooks';
+import { UserInstance } from '../../../adapters/presenter';
 
 const UserMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const settings = [
@@ -24,7 +21,7 @@ const UserMenu = () => {
       label: 'Выйти',
       action: () => {
         navigate('./');
-        dispatch(signOutAction());
+        UserInstance.signOut();
       },
     },
   ];
