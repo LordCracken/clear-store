@@ -1,36 +1,33 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { observer } from 'mobx-react-lite';
 import { Route, Routes } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 // MUI
 import { Container } from '@mui/material';
+// Store
+import { CartInstance, ProductsInstance, UserInstance } from '../adapters/presenter';
 // Components
 import Header from './components/Header/Header';
 import AuthPage from './pages/AuthPage';
 import ProductsPage from './pages/ProductsPage';
 import ProfilePage from './pages/ProfilePage';
 import Cart from './components/Cart/Cart';
-import { useAppDispatch } from './hooks';
-import { autologin, selectIsAuth } from '../adapters/redux/user';
-import { CartInstance, ProductsInstance } from '../adapters/presenter';
 
 const App = () => {
   const auth = getAuth();
-  const dispatch = useAppDispatch();
-  const isAuth = useSelector(selectIsAuth);
-  const products = ProductsInstance.products;
+  const { isAuthenticated } = UserInstance;
+  const { products } = ProductsInstance;
   const { getCart } = CartInstance;
 
   useEffect(() => {
     return onAuthStateChanged(auth, user => {
-      if (user) dispatch(autologin());
+      if (user) UserInstance.autologin();
     })();
   }, []);
 
   useEffect(() => {
     getCart(products);
-  }, [isAuth, products]);
+  }, [isAuthenticated, products]);
 
   return (
     <>

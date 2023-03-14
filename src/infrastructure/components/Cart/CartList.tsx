@@ -8,16 +8,16 @@ import CartItem from './CartItem';
 import { CartInstance } from '../../../adapters/presenter';
 
 const CartList = () => {
-  const { isAuthenticated, cartProducts, totalPrice, setIsOpen, reset } = CartInstance;
+  const { getIsAuth, cartProducts, totalPrice, setIsOpen, reset } = CartInstance;
   const navigate = useNavigate();
 
   const createOrderHandler = () => {
-    if (!isAuthenticated) {
+    if (!getIsAuth()) {
       navigate('/auth');
       setIsOpen(false);
       return;
     }
-    console.log(1);
+
     reset();
   };
 

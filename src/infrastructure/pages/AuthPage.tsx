@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 // MUI
 import { Box, Button, Grid, Stack, TextField } from '@mui/material';
 // Store
-import { signInAction, signUpAction, userActions } from '../../adapters/redux/user';
+import { UserInstance } from '../../adapters/presenter';
 // Shared
-import { useAppDispatch, useAppSelector, useInput } from '../hooks';
+import { useInput } from '../hooks';
 import { Status } from '../components/Status';
 
 const AuthPage = () => {
-  const dispatch = useAppDispatch();
-  const { isAuthenticated, status, statusMsg } = useAppSelector(state => state.user);
+  const { isAuthenticated, status, statusMsg } = UserInstance;
   const navigate = useNavigate();
 
   const emailRule = (value: Email) => value.length !== 0;
@@ -34,7 +34,6 @@ const AuthPage = () => {
     if (isAuthenticated) {
       navigate('/');
     }
-    dispatch(userActions.updateStatus({ status: '', statusMsg: '' }));
   }, [isAuthenticated]);
 
   const signInHandler = (signUp = false) => {
@@ -46,8 +45,11 @@ const AuthPage = () => {
     }
 
     if (!emailError && !passwordError) {
-      const action = signUp ? signUpAction(email, password) : signInAction(email, password);
-      dispatch(action);
+      if (signUp) {
+        UserInstance.signUp(email, password);
+      } else {
+        UserInstance.signIn(email, password);
+      }
     }
   };
 
@@ -117,4 +119,4 @@ const AuthPage = () => {
   );
 };
 
-export default AuthPage;
+export default observer(AuthPage);

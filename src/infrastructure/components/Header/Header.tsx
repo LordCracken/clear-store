@@ -6,10 +6,11 @@ import Logo from '../Logo';
 import UserMenu from './UserMenu';
 import SignInButton from './SignInButton';
 // Store
-import { CartInstance } from '../../../adapters/presenter';
+import { CartInstance, UserInstance } from '../../../adapters/presenter';
 
 const Header = () => {
-  const { isAuthenticated, cartProducts, setIsOpen } = CartInstance;
+  const isAuthenticated = UserInstance.isAuthenticated;
+  const { cartProducts, setIsOpen } = CartInstance;
 
   const openCart = () => {
     setIsOpen(true);
