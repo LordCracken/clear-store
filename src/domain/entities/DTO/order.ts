@@ -2,7 +2,6 @@ import { CartData } from './cart';
 import { Order, OrderStatuses } from '../order';
 
 export class OrderData {
-  readonly id: UniqueID;
   readonly user: UniqueID;
   readonly cart: CartData;
   readonly startTime: DateTime;
@@ -10,7 +9,6 @@ export class OrderData {
   readonly status: OrderStatuses;
 
   constructor(data: Order) {
-    this.id = data.id;
     this.user = data.user;
     this.cart = data.cart;
     this.startTime = data.startTime;
