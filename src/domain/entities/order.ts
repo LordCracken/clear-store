@@ -6,7 +6,6 @@ export enum OrderStatuses {
 }
 
 export class Order {
-  readonly id: UniqueID;
   readonly user: UniqueID;
   readonly cart: CartData;
   readonly startTime: DateTime;
@@ -21,8 +20,7 @@ export class Order {
     second: 'numeric',
   };
 
-  constructor(id: UniqueID, user: UniqueID, cart: CartData) {
-    this.id = id;
+  constructor(user: UniqueID, cart: CartData) {
     this.user = user;
     this.cart = cart;
 
