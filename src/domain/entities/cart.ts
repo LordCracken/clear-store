@@ -1,16 +1,12 @@
 type Products = Map<UniqueID, number>;
 
-interface ICart {
-  readonly products: Products;
-}
-
 export interface CartItem {
   id: UniqueID;
   quantity: number;
 }
 
-export class Cart implements ICart {
-  products: Products = new Map();
+export class Cart {
+  readonly products: Products = new Map();
 
   constructor(products: CartItem[]) {
     if (products) {
