@@ -3,8 +3,9 @@ import { AuthErrorCodes } from 'firebase/auth';
 
 import { AutologinCase, SignInCase, SignOutCase, SignUpCase } from '../../domain/useCases';
 import { UserService } from '../gateways';
+import { StoreWithStatus } from './';
 
-class UserStore {
+class UserStore implements StoreWithStatus {
   isAuthenticated = false;
   firstName = '';
   lastName = '';
@@ -17,7 +18,7 @@ class UserStore {
 
   getIsAuth = () => this.isAuthenticated;
 
-  setStatus = (status: Statuses, statusMsg: string) => {
+  setStatus = (status: Statuses, statusMsg = '') => {
     this.status = status;
     this.statusMsg = statusMsg;
   };
@@ -29,14 +30,15 @@ class UserStore {
   };
 
   signUp = async (email: Email, password: Password) => {
-    this.setStatus('loading', 'Загрузка...');
-
     const service = new UserService();
     const useCase = new SignUpCase(service);
 
     try {
+      this.setStatus('loading', 'Загрузка...');
+
       const { firstName, lastName } = await useCase.signUp(email, password);
       this.setUserInfo(firstName, lastName, true);
+
       this.setStatus('success', 'Добро пожаловать!');
     } catch (error) {
       switch ((error as AuthError).code) {
@@ -56,15 +58,16 @@ class UserStore {
   };
 
   signIn = async (email: Email, password: Password) => {
-    this.setStatus('loading', 'Загрузка...');
-
     const service = new UserService();
     const useCase = new SignInCase(service);
 
     try {
+      this.setStatus('loading', 'Загрузка...');
+
       const { firstName, lastName } = await useCase.signIn(email, password);
       this.setUserInfo(firstName, lastName, true);
       sessionStorage.removeItem('cart');
+
       this.setStatus('success', 'С возвращением!');
     } catch (error) {
       switch ((error as AuthError).code) {
@@ -84,16 +87,16 @@ class UserStore {
   };
 
   signOut = async () => {
-    this.setStatus('loading', 'Загрузка...');
-
     const service = new UserService();
     const useCase = new SignOutCase(service);
 
     try {
-      await useCase.signOut();
+      this.setStatus('loading', 'Загрузка...');
 
+      await useCase.signOut();
       this.setUserInfo('', '', false);
       sessionStorage.removeItem('cart');
+
       this.setStatus('success', 'До встречи!');
     } catch (error) {
       if (error instanceof Error) {
@@ -103,13 +106,15 @@ class UserStore {
   };
 
   autologin = async () => {
-    this.setStatus('loading', 'Загрузка...');
     const service = new UserService();
     const useCase = new AutologinCase(service);
 
     try {
+      this.setStatus('loading', 'Загрузка...');
+
       const { firstName, lastName } = await useCase.autologin();
       this.setUserInfo(firstName, lastName, true);
+
       this.setStatus('success', 'С возвращением!');
     } catch (error) {
       if (error instanceof Error) {

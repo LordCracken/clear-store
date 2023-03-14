@@ -10,17 +10,25 @@ import {
 } from '../../domain/useCases';
 
 import { CartService } from '../gateways/cart';
+import { StoreWithStatus } from './';
 
-class CartStore {
+class CartStore implements StoreWithStatus {
   isOpen = false;
   cartProducts: CartItem[] = [];
   totalPrice = 0;
   getIsAuth: () => boolean;
+  status?: Statuses;
+  statusMsg?: string;
 
   constructor(getIsAuth: () => boolean) {
     makeAutoObservable(this);
     this.getIsAuth = getIsAuth;
   }
+
+  setStatus = (status: Statuses, statusMsg = '') => {
+    this.status = status;
+    this.statusMsg = statusMsg;
+  };
 
   private setCartData = (cartProducts: CartItem[], totalPrice: number) => {
     this.cartProducts = cartProducts;
@@ -36,6 +44,8 @@ class CartStore {
     const useCase = new GetCartCase(service);
 
     try {
+      this.setStatus('loading', 'Загрузка...');
+
       let cart: CartData;
 
       if (this.getIsAuth()) {
@@ -54,8 +64,12 @@ class CartStore {
       }, 0);
 
       this.setCartData(cart.products, totalPrice);
-    } catch {
-      console.error('Не удалось загрузить корзину');
+
+      this.setStatus('success');
+    } catch (error) {
+      if (error instanceof Error) {
+        this.setStatus('error', 'Не удалось загрузить корзину');
+      }
     }
   };
 
@@ -64,11 +78,17 @@ class CartStore {
     const useCase = new AddToCartCase(service);
 
     try {
+      this.setStatus('loading', 'Загрузка...');
+
       const cart = await useCase.addToCart(id, this.cartProducts);
       this.setCartData(cart.products, this.totalPrice + price);
       sessionStorage.setItem('cart', JSON.stringify(cart));
-    } catch {
-      console.error('Не удалось добавить товар в корзину');
+
+      this.setStatus('success', 'Товар добавлен!');
+    } catch (error) {
+      if (error instanceof Error) {
+        this.setStatus('error', 'Не удалось добавить товар в корзину');
+      }
     }
   };
 
@@ -77,11 +97,17 @@ class CartStore {
     const useCase = new RemoveFromCartCase(service);
 
     try {
+      this.setStatus('loading', 'Загрузка...');
+
       const cart = await useCase.removeFromCart(id, this.cartProducts);
       this.setCartData(cart.products, this.totalPrice - price);
       sessionStorage.setItem('cart', JSON.stringify(cart));
-    } catch {
-      console.error('Не удалось удалить товар из корзины');
+
+      this.setStatus('success', 'Товар удалён!');
+    } catch (error) {
+      if (error instanceof Error) {
+        this.setStatus('error', 'Не удалось удалить товар из корзины');
+      }
     }
   };
 
@@ -90,11 +116,17 @@ class CartStore {
     const useCase = new EmptyCartCase(service);
 
     try {
+      this.setStatus('loading', 'Загрузка...');
+
       await useCase.emptyCart();
       this.setCartData([], 0);
       this.setIsOpen(false);
-    } catch {
-      console.error('Не удалось очистить корзину');
+
+      this.setStatus('success');
+    } catch (error) {
+      if (error instanceof Error) {
+        this.setStatus('error', 'Не удалось очистить корзину');
+      }
     }
   };
 }

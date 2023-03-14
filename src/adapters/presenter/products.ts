@@ -2,13 +2,21 @@ import { makeAutoObservable } from 'mobx';
 import { Product } from '../../domain/entities';
 import { GetProductsCase, ServerProducts } from '../../domain/useCases';
 import { ProductsService } from '../gateways';
+import { StoreWithStatus } from './';
 
-class ProductsStore {
+class ProductsStore implements StoreWithStatus {
   products: Product[] = [];
+  status?: Statuses;
+  statusMsg?: string;
 
   constructor() {
     makeAutoObservable(this);
   }
+
+  setStatus = (status: Statuses, statusMsg = '') => {
+    this.status = status;
+    this.statusMsg = statusMsg;
+  };
 
   private setProducts = (products: Product[]) => {
     this.products = products;
@@ -19,6 +27,8 @@ class ProductsStore {
     const useCase = new GetProductsCase(service);
 
     try {
+      this.setStatus('loading', 'Загрузка...');
+
       const data = await useCase.getProducts();
 
       const transformData = (data: ServerProducts) => {
@@ -32,8 +42,12 @@ class ProductsStore {
       };
 
       this.setProducts(transformData(data));
-    } catch {
-      console.error('Не удалось получить список товаров.');
+
+      this.setStatus('success');
+    } catch (error) {
+      if (error instanceof Error) {
+        this.setStatus('error', 'Не удалось получить список товаров.');
+      }
     }
   };
 
