@@ -92,6 +92,7 @@ class CartStore {
     try {
       await useCase.emptyCart();
       this.setCartData([], 0);
+      this.setIsOpen(false);
     } catch {
       console.error('Не удалось очистить корзину');
     }
