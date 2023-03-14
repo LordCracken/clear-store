@@ -12,6 +12,7 @@ import AuthPage from './pages/AuthPage';
 import ProductsPage from './pages/ProductsPage';
 import ProfilePage from './pages/ProfilePage';
 import Cart from './components/Cart/Cart';
+import Statuses from './components/Statuses';
 
 const App = () => {
   const auth = getAuth();
@@ -32,7 +33,7 @@ const App = () => {
   return (
     <>
       <Header />
-      <Container sx={{ mt: '100px' }}>
+      <Container sx={{ mt: { md: '100px', xs: '50px' } }}>
         <Routes>
           <Route path="/" element={<ProductsPage />} />
           <Route path="/auth" element={<AuthPage />} />
@@ -40,6 +41,7 @@ const App = () => {
         </Routes>
       </Container>
       <Cart />
+      <Statuses />
     </>
   );
 };

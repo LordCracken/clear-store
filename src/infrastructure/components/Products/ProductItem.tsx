@@ -2,9 +2,9 @@ import { FC } from 'react';
 // MUI
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 // Store
-import { CartInstance, ProductsInstance } from '../../adapters/presenter';
+import { CartInstance, ProductsInstance } from '../../../adapters/presenter';
 // Interfaces
-import { Product } from '../../domain/entities';
+import { Product } from '../../../domain/entities';
 
 type IProductItem = Omit<Product, 'description' | 'tags'>;
 

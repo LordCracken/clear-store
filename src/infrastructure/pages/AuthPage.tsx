@@ -7,10 +7,9 @@ import { Box, Button, Grid, Stack, TextField } from '@mui/material';
 import { UserInstance } from '../../adapters/presenter';
 // Shared
 import { useInput } from '../hooks';
-import { Status } from '../components/Status';
 
 const AuthPage = () => {
-  const { isAuthenticated, status, statusMsg } = UserInstance;
+  const { isAuthenticated } = UserInstance;
   const navigate = useNavigate();
 
   const emailRule = (value: Email) => value.length !== 0;
@@ -108,13 +107,6 @@ const AuthPage = () => {
           </Grid>
         </Grid>
       </Box>
-      {!!status && !!statusMsg && (
-        <Status
-          status={status}
-          message={statusMsg}
-          position={{ vertical: 'top', horizontal: 'center' }}
-        />
-      )}
     </>
   );
 };
