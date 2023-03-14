@@ -88,7 +88,7 @@ class CartStore {
     }
   };
 
-  async reset() {
+  reset = async () => {
     const service = new CartService();
     const useCase = new EmptyCartCase(service);
 
@@ -98,7 +98,7 @@ class CartStore {
     } catch {
       console.error('Не удалось очистить корзину');
     }
-  }
+  };
 }
 
 export default CartStore;
