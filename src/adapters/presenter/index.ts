@@ -1,7 +1,7 @@
+import UserStore from './user';
 import ProductsStore from './products';
 import CartStore from './cart';
-import UserStore from './user';
 
+export const UserInstance = new UserStore();
 export const ProductsInstance = new ProductsStore();
-export const CartInstance = new CartStore();
-export const UserInstance = new UserStore(CartInstance.setIsAuthenticated);
+export const CartInstance = new CartStore(UserInstance.getIsAuth);

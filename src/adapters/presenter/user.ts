@@ -10,14 +10,14 @@ class UserStore {
   lastName = '';
   status?: Statuses;
   statusMsg?: string;
-  setCartIsAuth: (value: boolean) => void;
 
-  constructor(setCartIsAuth: (value: boolean) => void) {
+  constructor() {
     makeAutoObservable(this);
-    this.setCartIsAuth = setCartIsAuth;
   }
 
-  private setStatus = (status: Statuses, statusMsg: string) => {
+  getIsAuth = () => this.isAuthenticated;
+
+  setStatus = (status: Statuses, statusMsg: string) => {
     this.status = status;
     this.statusMsg = statusMsg;
   };
@@ -26,7 +26,6 @@ class UserStore {
     this.firstName = firstName;
     this.lastName = lastName;
     this.isAuthenticated = isAuth;
-    this.setCartIsAuth(isAuth);
   };
 
   signUp = async (email: Email, password: Password) => {

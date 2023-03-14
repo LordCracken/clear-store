@@ -12,17 +12,14 @@ import {
 import { CartService } from '../gateways/cart';
 
 class CartStore {
-  isAuthenticated = false;
   isOpen = false;
   cartProducts: CartItem[] = [];
   totalPrice = 0;
+  getIsAuth: () => boolean;
 
-  constructor() {
+  constructor(getIsAuth: () => boolean) {
     makeAutoObservable(this);
-  }
-
-  setIsAuthenticated(value: boolean) {
-    this.isAuthenticated = value;
+    this.getIsAuth = getIsAuth;
   }
 
   private setCartData = (cartProducts: CartItem[], totalPrice: number) => {
@@ -41,7 +38,7 @@ class CartStore {
     try {
       let cart: CartData;
 
-      if (this.isAuthenticated) {
+      if (this.getIsAuth()) {
         cart = await useCase.getCart();
       } else {
         const storedCart = sessionStorage.getItem('cart');
