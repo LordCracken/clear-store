@@ -1,15 +1,18 @@
-import { Cart, Order, User } from '../../entities';
+import { User } from '../../entities';
+import { CartData, OrderData } from '../../entities/DTO';
 
-export type CreateOrderService = (user: User, cart: Cart) => Promise<Order>;
+export interface CreateOrderService {
+  create: (user: User, cart: CartData) => Promise<OrderData>;
+}
 
 export class CreateOrderCase {
-  service: CreateOrderService;
+  private createOrderService: CreateOrderService;
 
   constructor(service: CreateOrderService) {
-    this.service = service;
+    this.createOrderService = service;
   }
 
-  async createOrder(user: User, cart: Cart) {
-    return this.service(user, cart);
+  async createOrder(user: User, cart: CartData) {
+    return this.createOrderService.create(user, cart);
   }
 }
