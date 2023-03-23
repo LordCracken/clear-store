@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import { Product } from '../../domain/entities';
 import { GetProductsCase, ServerProducts } from '../../domain/useCases';
 import { ProductsService } from '../gateways';
@@ -16,10 +16,6 @@ class ProductsStore implements StoreWithStatus {
   setStatus = (status: Statuses, statusMsg = '') => {
     this.status = status;
     this.statusMsg = statusMsg;
-  };
-
-  private setProducts = (products: Product[]) => {
-    this.products = products;
   };
 
   fetchProductsData = async () => {
@@ -41,8 +37,7 @@ class ProductsStore implements StoreWithStatus {
         return products;
       };
 
-      this.setProducts(transformData(data));
-
+      runInAction(() => (this.products = transformData(data)));
       this.setStatus('success');
     } catch (error) {
       if (error instanceof Error) {
