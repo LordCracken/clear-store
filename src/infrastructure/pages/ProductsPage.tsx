@@ -33,7 +33,7 @@ const ProductsPage = () => {
   if (status === 'error') hasNoProducts = <ProductsListError />;
 
   return (
-    <Grid container spacing={products.length ? 2 : 0}>
+    <Grid container spacing={products.length ? 2 : 0} data-testid="products-page">
       {products.length ? hasProducts : hasNoProducts}
     </Grid>
   );
