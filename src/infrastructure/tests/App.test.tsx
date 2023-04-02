@@ -7,10 +7,8 @@ import App from '../App';
 describe('App component', () => {
   test('click logo', async () => {
     const { user } = renderWithRouter(<App />, { route: '/profile' });
-
     const title = screen.getByText(/programmaticon/i);
     await user.click(title);
-
     expect(screen.getByTestId('products-page')).toBeInTheDocument();
   });
 
