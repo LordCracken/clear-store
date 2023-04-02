@@ -17,12 +17,17 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" data-testid="header">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Logo />
           {isAuthenticated ? <UserMenu /> : <SignInButton />}
-          <IconButton color="inherit" onClick={openCart} sx={{ ml: '10px' }}>
+          <IconButton
+            color="inherit"
+            onClick={openCart}
+            sx={{ ml: '10px' }}
+            data-testid="cart-button"
+          >
             <Badge color="secondary" badgeContent={cartProducts.length}>
               <ShoppingCart />
             </Badge>

@@ -24,7 +24,7 @@ const Cart = () => {
           <ListItemIcon>
             <ShoppingCart />
           </ListItemIcon>
-          <ListItemText primary={'Корзина'} />
+          <ListItemText primary={'Корзина'} data-testid="cart-title" />
         </ListItem>
         <Divider />
         {!cartProducts.length ? hasNoOrder : hasOrder}
